@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920">
+<defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12Z" fill="#64748b"/></marker><style>text{font-family:Arial,sans-serif;fill:#172033}.h{font-size:34px;font-weight:700}.sub{font-size:19px;fill:#526078}.t{font-size:24px;font-weight:700}.d{font-size:18px;fill:#334155}.lane{fill:#f4f7fb;stroke:#cbd5e1;stroke-width:2}.card{fill:#fff;stroke:#54749b;stroke-width:2.5;rx:18}.pending{fill:#fffaf0;stroke:#d69e36;stroke-width:2.5;stroke-dasharray:9 6;rx:18}.arr{stroke:#64748b;stroke-width:4;fill:none;marker-end:url(#a)}</style></defs>
+<rect width="1600" height="920" fill="#fff"/><text x="70" y="76" class="h">SmartFan 2.0 — Overall System Architecture</text><text x="70" y="112" class="sub">Proposed logical architecture • hardware verification pending • not a wiring diagram</text>
+<rect x="55" y="160" width="1490" height="145" rx="24" class="lane"/><text x="82" y="198" class="t">1  Hardware &amp; sensing</text>
+<rect x="95" y="220" width="300" height="62" class="pending"/><text x="245" y="246" text-anchor="middle" class="t">Sensors (if supplied)</text><text x="245" y="270" text-anchor="middle" class="d">Exact models pending</text>
+<rect x="650" y="220" width="300" height="62" class="pending"/><text x="800" y="246" text-anchor="middle" class="t">ESP32 board</text><text x="800" y="270" text-anchor="middle" class="d">Exact model pending</text>
+<rect x="1205" y="220" width="280" height="62" class="pending"/><text x="1345" y="246" text-anchor="middle" class="t">USB fan + driver</text><text x="1345" y="270" text-anchor="middle" class="d">Electrical checks pending</text>
+<path d="M395 251 H640" class="arr"/><path d="M960 251 H1195" class="arr"/>
+<rect x="55" y="340" width="1490" height="130" rx="24" class="lane"/><text x="82" y="378" class="t">2  Embedded firmware</text>
+<rect x="300" y="400" width="1000" height="52" class="card"/><text x="800" y="433" text-anchor="middle" class="t">Sensor acquisition • validation • command checks • local fallback</text>
+<path d="M800 305 V390" class="arr"/>
+<rect x="55" y="505" width="1490" height="100" rx="24" class="lane"/><text x="82" y="545" class="t">3  Network</text>
+<rect x="475" y="540" width="650" height="48" class="card"/><text x="800" y="572" text-anchor="middle" class="t">Wi-Fi • HTTP + JSON (proposed)</text><path d="M800 470 V530" class="arr"/>
+<rect x="55" y="640" width="720" height="220" rx="24" class="lane"/><text x="82" y="680" class="t">4  Computer backend &amp; AI</text>
+<rect x="100" y="715" width="260" height="100" class="card"/><text x="230" y="753" text-anchor="middle" class="t">Flask API</text><text x="230" y="783" text-anchor="middle" class="d">Validation &amp; logging</text>
+<rect x="455" y="715" width="270" height="100" class="pending"/><text x="590" y="753" text-anchor="middle" class="t">Decision Tree</text><text x="590" y="783" text-anchor="middle" class="d">Model planned</text><path d="M360 765 H445" class="arr"/><path d="M800 605 V625 H230 V705" class="arr"/>
+<rect x="825" y="640" width="720" height="220" rx="24" class="lane"/><text x="852" y="680" class="t">5  Web dashboard</text>
+<rect x="875" y="715" width="280" height="100" class="card"/><text x="1015" y="753" text-anchor="middle" class="t">Monitoring &amp; charts</text><text x="1015" y="783" text-anchor="middle" class="d">ECharts • history</text>
+<rect x="1200" y="715" width="290" height="100" class="card"/><text x="1345" y="753" text-anchor="middle" class="t">Manual / auto control</text><text x="1345" y="783" text-anchor="middle" class="d">Requests via backend</text><path d="M1155 765 H1190" class="arr"/><path d="M1125 564 H1435 V705" class="arr"/>
+<text x="70" y="895" class="sub">Legend: solid outline = planned module • dashed amber = component / capability not yet verified</text></svg>

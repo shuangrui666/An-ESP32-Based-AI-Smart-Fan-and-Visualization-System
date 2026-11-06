@@ -28,6 +28,10 @@ The ESP32 is planned to acquire sensor readings and execute validated fan comman
 
 ### 2.1 System Architecture Diagram
 
+![Overall system architecture](images/system_architecture.svg)
+
+The SVG above is the rendered overview. The Mermaid source below is retained as an editable text version.
+
 ```mermaid
 flowchart TB
     subgraph HW["Hardware Layer"]
@@ -106,6 +110,10 @@ The ESP32 should retain a simple local fallback strategy for loss of backend or 
 Do not assume that a sensor or driver is included until it has been physically identified.
 
 ### 3.2 Hardware Block Diagram
+
+![Conceptual hardware architecture](images/hardware_architecture.svg)
+
+The SVG above is a conceptual block diagram only. The Mermaid source below is retained as an editable text version.
 
 ```mermaid
 flowchart LR
@@ -313,6 +321,10 @@ If Wi-Fi or the backend is unavailable, the ESP32 should use a predefined local 
 If no tachometer or speed sensor is installed, the dashboard must display the commanded fan level, not measured RPM.
 
 ### 9.3 Planned Software Workflow
+
+![Software and control workflow](images/software_workflow.svg)
+
+The SVG above is the rendered workflow. The Mermaid source below is retained as an editable text version.
 
 ```mermaid
 flowchart TD
