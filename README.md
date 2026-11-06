@@ -171,6 +171,7 @@ Directories will be added as real work products are created; empty folders and u
 - Initial project concept and technical direction documented.
 - GitHub repository created.
 - Initial README, project proposal and development schedule drafted.
+- Preliminary system architecture document created; hardware-specific details remain pending verification.
 - USB-powered fan purchased.
 
 ### Pending verification
