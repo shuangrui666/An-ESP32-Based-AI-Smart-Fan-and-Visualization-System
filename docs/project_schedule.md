@@ -14,7 +14,7 @@ Status definitions:
 
 | Stage | Main tasks | Verifiable output | Current status |
 |---|---|---|---|
-| 1. Project documentation | Create repository, README, proposal and schedule | Planning documents in GitHub | In progress |
+| 1. Project documentation | Create repository, README, proposal, schedule and preliminary system architecture | Planning documents in GitHub | Completed (preliminary design) |
 | 2. Hardware inventory | Inspect ESP-Claw kit; identify board, sensors, driver, wires and tools | Dated inventory with photos/model numbers | Pending |
 | 3. Fan verification | Record label and seller specifications; measure/check electrical behavior with suitable equipment | Fan specification and verification record | Pending |
 | 4. Hardware proof of concept | Test ESP32 and sensors separately; select driver only after fan verification | Wiring record and bench-test results | Pending |
@@ -32,8 +32,9 @@ Status definitions:
 - [x] Create the initial README.
 - [x] Create the project proposal.
 - [x] Create this development schedule.
-- [ ] Review document paths and consistency.
-- [ ] Create the system architecture document after hardware inventory.
+- [x] Review the main planning-document paths and consistency.
+- [x] Create the preliminary system architecture document.
+- [ ] Revise the hardware-specific architecture after the ESP-Claw kit and fan specifications are verified.
 
 ### Stage 2 — Hardware Inventory
 - [ ] Inspect and photograph the complete ESP-Claw kit.
@@ -117,6 +118,7 @@ As of the latest planning update:
 | README | Initial version created | Review and maintain as project evolves |
 | Project proposal | Created | Review after hardware inventory |
 | Development schedule | Created | Update when deadlines are confirmed |
+| Preliminary system architecture | Created | Update hardware details after kit and fan verification |
 | USB-powered fan | Purchased | Verify specifications and actual behavior |
 | ESP-Claw kit inventory | Pending | Inspect with instructor |
 | Fan electrical verification | Pending | Obtain specifications and test safely |
