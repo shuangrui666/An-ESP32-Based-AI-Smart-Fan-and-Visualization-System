@@ -28,9 +28,9 @@ The ESP32 is planned to acquire sensor readings and execute validated fan comman
 
 ### 2.1 System Architecture Diagram
 
-![Overall system architecture](images/system_architecture.svg)
+![Overall system architecture](images/system_architecture.png)
 
-The SVG above is the rendered overview. The Mermaid source below is retained as an editable text version.
+The PNG above is the rendered overview. The corresponding SVG file is also retained in this directory as a scalable vector version. The Mermaid source below is retained as an editable text version.
 
 ```mermaid
 flowchart TB
@@ -111,9 +111,9 @@ Do not assume that a sensor or driver is included until it has been physically i
 
 ### 3.2 Hardware Block Diagram
 
-![Conceptual hardware architecture](images/hardware_architecture.svg)
+![Conceptual hardware architecture](images/hardware_architecture.png)
 
-The SVG above is a conceptual block diagram only. The Mermaid source below is retained as an editable text version.
+The PNG above is a conceptual block diagram only. The corresponding SVG file is also retained in this directory as a scalable vector version. The Mermaid source below is retained as an editable text version.
 
 ```mermaid
 flowchart LR
@@ -322,9 +322,9 @@ If no tachometer or speed sensor is installed, the dashboard must display the co
 
 ### 9.3 Planned Software Workflow
 
-![Software and control workflow](images/software_workflow.svg)
+![Software and control workflow](images/software_workflow.png)
 
-The SVG above is the rendered workflow. The Mermaid source below is retained as an editable text version.
+The PNG above is the rendered workflow. The corresponding SVG file is also retained in this directory as a scalable vector version. The Mermaid source below is retained as an editable text version.
 
 ```mermaid
 flowchart TD
