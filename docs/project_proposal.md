@@ -1,105 +1,98 @@
-# SmartFan 2.0 Project Proposal
+# SmartFan 2.0 — Project Proposal
 
 ## 1. Project Background
 
-Traditional fans usually rely on manual operation or simple control mechanisms. They provide limited environmental awareness, intelligent decision-making and remote monitoring capabilities.
+Conventional fans generally provide limited environmental awareness, data recording and remote monitoring. Internet of Things (IoT) devices, embedded controllers and machine learning offer an opportunity to explore more adaptive and observable control systems.
 
-With the development of the Internet of Things (IoT), embedded systems and artificial intelligence, it is possible to develop more intelligent and interactive fan systems.
-
-SmartFan 2.0 aims to explore the integration of ESP32, environmental sensors, machine learning and web-based visualization to build an intelligent fan prototype.
+SmartFan 2.0 is a proposed prototype that combines an ESP32 controller, available environmental sensors, a Python-based machine-learning service and a web visualization dashboard. The project will first verify whether the purchased USB-powered fan can be controlled safely and reliably before finalizing the motor-driving circuit.
 
 ## 2. Project Objectives
 
-The project aims to:
-
-1. Build an ESP32-based smart fan prototype.
-2. Collect environmental temperature and humidity data.
-3. Detect human movement using a motion sensor.
-4. Implement automatic fan control.
-5. Develop a Python-based machine learning model for fan operating-level recommendations.
-6. Build a web dashboard for real-time monitoring and remote control.
-7. Visualize historical sensor data and AI prediction results.
-8. Evaluate system performance through practical experiments.
+1. Identify and document the available hardware and the fan's electrical characteristics.
+2. Build an ESP32-based sensor and control prototype.
+3. Measure temperature and humidity where supported by the available sensor.
+4. Add movement detection if a compatible PIR sensor is available.
+5. Implement fan control only after verifying electrical compatibility.
+6. Develop a Python model that recommends fan operating levels.
+7. Provide Wi-Fi communication and a responsive web dashboard.
+8. Record experimental data and evaluate the system using repeatable tests.
 
 ## 3. Proposed Functions
 
 ### 3.1 Environmental Monitoring
-Collect and display temperature and humidity data.
+Read and display temperature and, if supported by the selected sensor, humidity.
 
-### 3.2 Human Activity Detection
-Use a PIR sensor to detect human movement and support automatic control strategies.
+### 3.2 Movement Detection
+Use a PIR sensor if available to detect movement events. A PIR sensor detects changes associated with movement; it does not reliably prove that a person is absent when no movement is detected.
 
-### 3.3 Intelligent Fan Control
-Adjust fan operation according to environmental conditions and user preferences.
+### 3.3 Fan Control
+Provide OFF/LOW/MEDIUM/HIGH commands only if the verified fan, motor driver and power arrangement support these levels safely and repeatably. If smooth speed control is not feasible, revise the control design and document the limitation.
 
-### 3.4 AI-Based Decision Support
-Use a Decision Tree Classifier implemented with Python and scikit-learn to recommend fan operating levels.
+### 3.4 AI-Based Recommendation
+Initially use a scikit-learn Decision Tree Classifier running on a Windows computer. Candidate inputs include measured environmental values, available movement state and recorded user preferences. Labels must be documented and grounded in a defined rule set or actual observations.
 
-### 3.5 Remote Control
-Provide a mobile-friendly web interface for manual and automatic fan operation.
+### 3.5 Remote Operation
+Provide a mobile-friendly page for status monitoring and manual/automatic control through the Python backend.
 
 ### 3.6 Data Visualization
-Display real-time sensor readings, historical trends, fan operating states and AI model evaluation results.
+Use a dashboard to display current readings, historical trends, fan command levels, movement events and AI recommendations. If actual fan RPM is not measured, show the commanded level rather than a measured speed.
 
 ## 4. Technical Approach
 
-The proposed system consists of four layers:
+The proposed architecture contains four layers:
 
-- Hardware layer: ESP32, sensors, fan and motor driver.
-- Communication layer: Wi-Fi and HTTP.
-- AI and backend layer: Python, Flask and scikit-learn.
-- Visualization layer: HTML, CSS, JavaScript and ECharts.
+- **Hardware:** ESP32, verified sensors, fan and compatible motor driver.
+- **Communication:** Wi-Fi and HTTP between ESP32 and the computer.
+- **Backend and AI:** Python/Flask service and scikit-learn model running on the computer.
+- **Visualization:** HTML, CSS, JavaScript and ECharts dashboard.
 
-The Windows computer will initially run the AI model. The ESP32 will execute the received control commands.
+The ESP32 will perform sensor acquisition and execute validated commands. The computer will receive data and run the initial machine-learning model. A simple local rule-based fallback is planned for computer or network outages.
 
-A local rule-based control mechanism is planned as a fallback when the computer or network is unavailable.
+## 5. Project Characteristics
 
-## 5. Innovation and Project Characteristics
+1. Combines embedded control, IoT communication, machine learning and visualization.
+2. Connects physical device behavior with a web dashboard.
+3. Supports manual and automatic operating modes, subject to verified hardware capability.
+4. Uses recorded data and repeatable tests to evaluate system behavior.
+5. Maintains traceable records of design decisions, tests and revisions.
 
-1. Combines embedded systems, IoT and machine learning.
-2. Integrates real hardware control with a web visualization dashboard.
-3. Supports both automatic and manual operating modes.
-4. Records experimental data for analysis and evaluation.
-5. Uses an evidence-based development process.
-
-These are intended project characteristics and will be evaluated through implementation and testing.
+These are intended characteristics, not claims of completed or novel research results.
 
 ## 6. Experimental Plan
 
-The planned experiments include:
+Planned tests include:
 
-- Temperature and humidity measurement tests.
-- Human activity detection tests.
-- Fan control and operating-level tests.
-- Wi-Fi communication tests.
-- AI model evaluation.
-- Dashboard data accuracy and update tests.
-- System stability tests.
+- Sensor reading consistency and response.
+- PIR detection behavior, if the sensor is available.
+- Fan startup, stable operation and control-level behavior.
+- Driver and power-supply temperature/current checks, using suitable lab instruments.
+- Wi-Fi communication and reconnection behavior.
+- Dashboard data correctness and update behavior.
+- AI model evaluation on a held-out test set.
+- Local fallback behavior when the computer or network is disconnected.
 
-Experimental results will be recorded and analyzed.
+Each experiment will record setup, conditions, procedure, raw data, result and limitations.
 
-## 7. Budget and Resource Constraints
+## 7. Budget and Resources
 
-The project will prioritize the use of available ESP-Claw kit components and borrowed laboratory equipment.
-
-Additional purchases will be made only after checking the existing hardware inventory and verifying the fan's electrical specifications.
-
-The project will follow the applicable component cost limit set by the instructor.
+The project will prioritize the purchased fan, available ESP-Claw kit components and borrowed laboratory tools. Additional components will only be purchased after the kit inventory and fan specifications are confirmed. The project will comply with the instructor's applicable component-cost limit; the exact interpretation of that limit must be confirmed.
 
 ## 8. Expected Deliverables
 
-1. A working SmartFan 2.0 prototype.
+1. A tested smart-fan prototype, within verified hardware capabilities.
 2. ESP32 firmware source code.
-3. Python backend and machine learning code.
-4. A responsive web visualization dashboard.
-5. Experimental datasets and analysis charts.
-6. Hardware documentation and wiring diagrams.
-7. Project report and demonstration materials.
+3. Python backend and machine-learning source code.
+4. Responsive web dashboard.
+5. Original experimental data and analysis scripts.
+6. Wiring diagrams, component inventory and safety notes.
+7. Experiment records, photos/videos and final report.
 
-## 9. Current Status
+## 9. Current Status and Constraints
 
-The project is currently in the preparation and hardware verification stage.
+The project is in the preparation and hardware-verification stage. The GitHub repository and initial planning documents have been created, and a USB-powered fan has been purchased.
 
-The system architecture and initial technical approach have been planned. The fan electrical specifications and available kit components still require confirmation.
+The fan's rated voltage, operating current, startup current and exact motor details have not yet been verified. The ESP-Claw kit inventory, exact ESP32 board, sensors and motor-driver availability also remain to be confirmed. Therefore, the final circuit, bill of materials and speed-control method are not yet fixed.
 
-Functions will be marked as completed only after implementation and verification.
+## 10. Acceptance Principle
+
+A function will be marked complete only after implementation and verification. Planned functions, simulated dashboard data and actual sensor measurements will be clearly distinguished. No measurement, model metric or performance claim will be invented.
