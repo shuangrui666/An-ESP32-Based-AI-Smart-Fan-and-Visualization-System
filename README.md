@@ -1,236 +1,144 @@
-# An-ESP32-Based-AI-Smart-Fan-and-Visualization-System
 # SmartFan 2.0
 **An ESP32-Based AI Smart Fan and Visualization System**
 
+> **Project stage:** Preparation and hardware verification  
+> **Implementation status:** Planned functions are not yet verified on the physical prototype.
+
 ## 1. Project Overview
 
-SmartFan 2.0 is an intelligent fan prototype based on the ESP32 microcontroller, Python-based machine learning and a web-based visualization dashboard.
+SmartFan 2.0 is a planned smart-fan prototype combining an ESP32 controller, environmental sensing, a Python-based machine-learning service and a responsive web dashboard.
 
-The project aims to transform an ordinary USB-powered fan into an intelligent system with environmental monitoring, human activity detection, AI-assisted fan control, Wi-Fi remote operation and real-time data visualization.
+The project aims to investigate whether an ordinary USB-powered fan can be upgraded with environmental monitoring, activity-aware control, AI-assisted operating-level recommendations, Wi-Fi communication and data visualization.
 
-Artificial intelligence will be integrated throughout the development process and implemented as a real function in the final system.
-
-The project emphasizes practical implementation, experimental verification, data visualization, system integration and engineering documentation.
+The project will document design decisions, implementation, experiments, limitations and revisions. Features will only be described as completed after they have been implemented and tested.
 
 ## 2. Project Objectives
 
-1. Develop an ESP32-based smart fan control system.
-2. Monitor environmental temperature and humidity.
-3. Detect human activity using a PIR motion sensor.
-4. Implement automatic fan control according to environmental conditions.
-5. Develop a machine learning model to recommend fan operating levels.
-6. Enable remote operation through a mobile-friendly web interface.
-7. Build a real-time visualization dashboard.
-8. Record historical sensor data and fan operating states.
-9. Evaluate system performance using experimental data.
-10. Document the complete engineering development process.
+1. Build an ESP32-based control prototype.
+2. Measure environmental temperature and, if supported by the available sensor, humidity.
+3. Detect movement using a PIR sensor if one is available in the kit or can be borrowed.
+4. Implement safe fan control after verifying the fan's electrical characteristics and selecting a compatible driver.
+5. Develop a Python machine-learning model to recommend fan operating levels.
+6. Exchange sensor data and control commands over Wi-Fi.
+7. Build a mobile- and desktop-friendly monitoring dashboard.
+8. Record historical data and visualize system behavior.
+9. Evaluate the prototype with repeatable experiments and report limitations honestly.
 
-## 3. Main System Functions
+## 3. Planned Features and Status
 
-| Function | Description | Status |
+| Feature | Planned behavior | Status |
 |---|---|---|
-| Environmental monitoring | Collect temperature and humidity | Planned |
-| Human activity detection | Detect movement using a PIR sensor | Planned |
-| Automatic fan control | Adjust fan operation according to control rules | Planned |
-| AI-based control | Predict recommended fan operating levels | Planned |
-| Wi-Fi communication | Exchange data between ESP32 and computer | Planned |
-| Mobile remote control | Operate the fan through a web interface | Planned |
-| Real-time dashboard | Display environmental and device information | Planned |
-| Historical charts | Display changes over time | Planned |
-| AI visualization | Display model predictions and evaluation results | Planned |
-| Offline fallback | Use local ESP32 rules if the AI computer is unavailable | Planned |
+| Environmental monitoring | Display measured temperature and humidity when supported by the selected sensor | Planned |
+| Motion detection | Detect movement with a compatible PIR sensor, if available | Pending hardware confirmation |
+| Fan control | Control OFF/LOW/MEDIUM/HIGH levels if the fan and driver support reliable control | Pending electrical verification |
+| AI recommendation | Python model recommends a fan operating level | Planned |
+| Wi-Fi communication | Exchange data and commands between ESP32 and computer | Planned |
+| Web dashboard | Show current readings, device status and control mode | Planned |
+| Historical charts | Plot sensor readings, activity events and fan command history | Planned |
+| AI visualization | Show decision-tree structure and evaluation results after model training | Planned |
+| Offline fallback | ESP32 uses a documented local rule when the computer/network is unavailable | Planned |
 
-## 4. System Architecture
+## 4. Proposed System Architecture
 
-The proposed system contains four main layers.
+The initial architecture has four layers.
 
-### 4.1 Hardware Layer
+### 4.1 Hardware and sensing
 
-Planned hardware:
-
+Candidate components include:
 - ESP32 development board
-- USB-powered DC fan
-- Temperature and humidity sensor
-- PIR motion sensor
-- Suitable motor driver
-- Optional TFT display or RGB LED module
+- Purchased USB-powered fan
+- Temperature/humidity sensor available in the kit
+- PIR motion sensor, if available
+- Motor driver selected only after fan voltage and current are verified
+- Optional display or RGB indicator if included in the kit
 
-The final hardware configuration will depend on the actual ESP-Claw kit inventory and verified fan specifications.
+The fan is advertised as USB-powered, and the seller has described it as using a brushed motor. Its rated voltage, operating current, startup current and exact motor construction still need verification. USB power must not be treated as proof of a confirmed electrical rating.
 
-### 4.2 Communication and Backend Layer
+### 4.2 Firmware and communication
 
-The ESP32 will collect sensor data and communicate with a Windows computer through Wi-Fi and HTTP.
+The ESP32 is planned to read sensors, report device state and receive control commands over Wi-Fi/HTTP. The exact communication protocol and update interval will be confirmed during implementation.
 
-The Python backend will receive sensor information, manage data, call the machine learning model and provide control and monitoring interfaces.
+### 4.3 Python backend and AI
 
-### 4.3 Artificial Intelligence Layer
+A Windows computer will initially run a Python service, planned with Flask, and a scikit-learn Decision Tree Classifier.
 
-A Python-based Decision Tree Classifier using scikit-learn is planned for the initial implementation.
+Potential inputs include measured temperature, humidity (if available), motion state (if available) and an explicitly recorded user preference. The model may recommend OFF, LOW, MEDIUM or HIGH.
 
-Potential inputs:
+Training labels must come from a documented rule set or actual user-labeled observations. The project will not describe rule-generated labels as independently measured comfort or claim model accuracy before evaluation. The ESP32 will retain a simple local fallback rule for loss of computer/network connectivity.
 
-- Temperature
-- Humidity
-- Human activity status
-- User-selected preferences
+### 4.4 Web visualization
 
-The model will recommend one of four operating levels:
+A responsive web dashboard is planned with HTML, CSS, JavaScript and ECharts. It will display current sensor values, connection state, operating mode, commanded fan level, historical trends and AI recommendations.
 
-- OFF
-- LOW
-- MEDIUM
-- HIGH
+If no tachometer or speed sensor is installed, the dashboard will display the **commanded level**, not claim to show measured RPM.
 
-The ESP32 will receive the recommended control command and execute it through a suitable motor driver.
+## 5. Visualization Scope
 
-If the computer or network connection becomes unavailable, local rule-based control will provide a fallback.
+### 5.1 Real-time dashboard
+- Temperature and humidity readings, where supported
+- Device connection state
+- Motion state, if a PIR sensor is used
+- Automatic/manual mode
+- Fan commanded level and operating state
+- AI-recommended level
 
-Training labels and model evaluation will be based on documented rules or actual collected data. Model performance will not be claimed before testing.
+### 5.2 Historical charts
+- Temperature and humidity time series
+- Fan command-level timeline
+- Motion-event timeline
+- Comparison of AI recommendations and executed commands
 
-### 4.4 Visualization and User Interface Layer
-
-A responsive web dashboard will support computer and mobile browsers.
-
-Planned technologies:
-
-- HTML
-- CSS
-- JavaScript
-- ECharts
-
-The dashboard will communicate with the Python backend to display real-time and historical information.
-
-## 5. Data Visualization and Monitoring
-
-### 5.1 Real-Time Monitoring Dashboard
-
-The dashboard will display:
-
-- Current temperature
-- Current humidity
-- Fan operating status
-- Current fan control level
-- Human activity detection status
-- Automatic or manual mode
-- Device connection status
-- AI-recommended operating level
-
-### 5.2 Historical Data Visualization
-
-The system will record and visualize:
-
-- Temperature changes over time
-- Humidity changes over time
-- Fan operating-level changes
-- Human activity events
-- Automatic control responses
-
-### 5.3 AI Model Visualization
-
-The project will provide:
-
-- Decision tree structure visualization
-- AI prediction results
-- Model accuracy
+### 5.3 AI model analysis
+- Decision-tree visualization
 - Confusion matrix
-- Prediction and actual-label comparison
+- Accuracy and other suitable metrics
+- Prediction-versus-reference comparison
 
-All model evaluation results will be generated from actual experiments.
+Metrics will be calculated from a clearly described test set. Results will not be fabricated or inferred from training performance alone.
 
-### 5.4 Remote Control Interface
+### 5.4 Remote control
+- Fan ON/OFF
+- Automatic/manual mode selection
+- Manual level selection, only if supported by the verified hardware
 
-The web interface will provide:
+## 6. Planned Technology Stack
 
-- Fan ON/OFF control
-- Automatic mode
-- Manual mode
-- Fan level selection
-- Current device status
-
-The actual fan control capability will be verified against the motor and driver specifications.
-
-## 6. Technology Stack
-
-| Area | Technology |
+| Area | Planned technology |
 |---|---|
-| Microcontroller | ESP32 |
-| Firmware | C++ / Arduino framework |
-| AI programming | Python |
-| Machine learning | scikit-learn |
+| Microcontroller | ESP32 (exact board to be identified) |
+| Firmware | C++ / Arduino framework, subject to board compatibility |
+| AI | Python, scikit-learn |
 | Backend | Flask |
 | Communication | Wi-Fi / HTTP |
 | Frontend | HTML, CSS, JavaScript |
-| Chart visualization | ECharts |
+| Charts | ECharts |
 | Data processing | pandas, NumPy |
-| Data analysis | Matplotlib |
-| Version control | Git |
-| Project hosting | GitHub |
+| Offline analysis | Matplotlib |
+| Version control | Git and GitHub |
 
-## 7. Project Development Plan
+## 7. Development Stages
 
-### Stage 1: Project Preparation
-- Create the GitHub repository.
-- Inspect the purchased fan.
-- Identify the ESP32 board and available sensor modules.
-- Confirm laboratory equipment and borrowing arrangements.
-- Finalize the hardware architecture.
+1. Project documentation and hardware inventory.
+2. Fan and kit verification; confirm power and driver requirements.
+3. Sensor and fan-control bench tests.
+4. ESP32 firmware and Wi-Fi communication.
+5. Python backend and data logging.
+6. Dashboard using simulated data first, then verified live data.
+7. Dataset preparation, AI training and evaluation.
+8. Integration, fallback behavior and system tests.
+9. Final experiments, report, demonstration and repository review.
 
-### Stage 2: Hardware Development
-- Connect the ESP32 and sensors.
-- Test temperature and humidity measurements.
-- Test PIR motion detection.
-- Verify fan electrical specifications.
-- Select and test a suitable motor driver.
-- Implement basic fan control.
-
-### Stage 3: Firmware and Backend Development
-- Develop ESP32 sensor acquisition firmware.
-- Implement Wi-Fi communication.
-- Develop the Python backend.
-- Create data receiving and control APIs.
-- Implement data storage.
-
-### Stage 4: AI Model Development
-- Prepare a documented training dataset.
-- Define and explain model labels.
-- Train the initial Decision Tree Classifier.
-- Evaluate the model.
-- Visualize the decision tree and evaluation results.
-- Connect model predictions to the control system.
-
-### Stage 5: Visualization Dashboard Development
-- Build the responsive dashboard.
-- Display real-time environmental data.
-- Display fan status and operating level.
-- Add temperature and humidity time-series charts.
-- Add fan operation and activity timelines.
-- Display AI recommendations and model analysis.
-- Implement manual and automatic remote control.
-
-### Stage 6: System Integration and Testing
-- Integrate hardware, firmware, backend, AI and dashboard.
-- Test automatic and manual operating modes.
-- Test communication reliability.
-- Test offline fallback behavior.
-- Evaluate control stability.
-
-### Stage 7: Experimental Evaluation and Documentation
-- Conduct temperature response tests.
-- Conduct human activity detection tests.
-- Evaluate fan speed control.
-- Record experimental data.
-- Generate data visualization charts.
-- Prepare the final report and presentation.
-- Organize photos, videos, source code and test evidence.
+Detailed tasks and progress are tracked in [docs/project_schedule.md](docs/project_schedule.md).
 
 ## 8. Repository Structure
 
 ```text
-smartfan-2.0/
+.
 ├── README.md
-├── LICENSE
-├── requirements.txt
 ├── docs/
+│   ├── project_proposal.md
+│   ├── project_schedule.md
+│   └── system_architecture.md
 ├── hardware/
 ├── firmware/
 ├── backend/
@@ -243,41 +151,41 @@ smartfan-2.0/
 └── ai_collaboration/
 ```
 
-Each directory will contain relevant source code, data, documentation or experimental evidence as development progresses.
+Directories will be added as real work products are created; empty folders and unverified deliverables will not be used to imply progress.
 
 ## 9. Safety and Engineering Principles
 
-- Never connect a motor directly to an ESP32 GPIO pin.
-- Select the motor driver according to the actual motor voltage and current requirements.
-- Verify the power supply before connecting the motor.
-- Disconnect power before modifying wiring.
-- Do not modify or puncture lithium batteries.
-- Distinguish planned functions from experimentally verified functions.
-- Preserve original experimental data and document data processing.
-- Do not fabricate measurements, model results or performance claims.
+- Never connect a motor directly to an ESP32 GPIO.
+- Verify fan voltage, running current and startup current before choosing a driver or power arrangement.
+- Ensure the motor supply and ESP32 share an appropriate reference ground when required by the driver circuit.
+- Disconnect power before changing wiring.
+- Do not modify or puncture batteries.
+- Distinguish measured values from commanded values.
+- Preserve original experimental data and document processing steps.
+- Clearly label planned, pending, tested and completed functions.
+- Do not fabricate measurements, images, test results or model metrics.
 
 ## 10. Current Project Status
 
-**Current stage: Project preparation and hardware verification.**
+### Completed
+- Initial project concept and technical direction documented.
+- GitHub repository created.
+- Initial README, project proposal and development schedule drafted.
+- USB-powered fan purchased.
 
-Completed:
-- Initial project concept
-- Preliminary system architecture
-- Initial AI implementation route
-- Advanced visualization objectives
-- Purchase of a USB-powered fan
+### Pending verification
+- Fan label/specifications: rated voltage, current, startup current and motor details.
+- ESP-Claw kit inventory and exact ESP32 board model.
+- Available sensors, motor driver, wiring materials and laboratory tools.
+- Applicable additional-component budget limit.
 
-Pending:
-- Confirm fan voltage, current and motor specifications.
-- Inspect the ESP-Claw kit.
-- Confirm available sensors and motor driver modules.
-- Finalize hardware and power supply design.
-- Implement and test the hardware, AI model, backend and dashboard.
+### Not yet implemented
+- Hardware wiring and fan driver
+- ESP32 firmware
+- Python backend and AI model
+- Web dashboard and live data integration
+- Experimental evaluation
 
-## 11. Development Principle
+## 11. Evidence-Based Development
 
-SmartFan 2.0 follows an evidence-based engineering approach.
-
-All circuit designs, source code, experimental data, visualizations and performance claims will be supported by actual implementation or testing.
-
-Unverified functions will remain marked as planned or pending until they have been successfully tested.
+This project follows an evidence-based engineering approach. Design choices, source code, measurements, visualizations and performance claims will be supported by implementation records or experiments. Unverified functions remain planned or pending until successfully tested.
