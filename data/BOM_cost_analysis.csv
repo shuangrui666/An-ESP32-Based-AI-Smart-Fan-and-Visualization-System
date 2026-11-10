@@ -1,1 +1,6 @@
 component_id,name,model,quantity,unit_price_cny,quantity_break,bulk_quote_total_cny,supplier,source_url,quote_date,price_type,calculation_method,verification_status,notes
+HW-001,ESP32-S3 development board,YD-ESP32-S3 Classic V1.0,1,,,,,,,included_in_kit_or_cost_not_yet_allocated,Await kit invoice/receipt or kit BOM,pending_price_evidence,Board identified; purchase allocation not yet available
+HW-002,ESP32-S3 module,ESP32-S3-WROOM-1 suffix unknown,1,,,,,,,included_with_development_board,Not separately costed; avoid double counting,pending_price_evidence,Module is soldered onto HW-001 and is not treated as a separate purchase
+HW-003,DHT11 temperature and humidity module,DHT11,1,,,,,,,included_in_kit_or_cost_not_yet_allocated,Await kit invoice/receipt or kit BOM,pending_price_evidence,User-confirmed module; purchase price not provided
+HW-004,USB fan,USB fan 5V 1A,1,,,,,,,retail_purchase_price_not_provided,Await order record or receipt,pending_price_evidence,Seller-confirmed rated values 5 V / 1 A; no price amount supplied in available records
+HW-005,Jumper wires,Exact type/length pending,待清点,,,,,,,already_owned_price_not_provided,Record actual historical cost if required by course rules,pending_quantity_and_price,User confirms wires are already owned; quantity and price not yet documented
