@@ -8,9 +8,9 @@ SmartFan 2.0 is a proposed prototype that combines an ESP32 controller, availabl
 
 ## 2. Project Objectives
 
-1. Identify and document the available hardware and the fan's electrical characteristics.
+1. Identify and document the available hardware, including the YD-ESP32-S3 Classic V1.0 board, DHT11 module and seller-confirmed 5 V / 1 A USB fan rating; verify remaining electrical characteristics before circuit design.
 2. Build an ESP32-based sensor and control prototype.
-3. Measure temperature and humidity where supported by the available sensor.
+3. Use the user-confirmed DHT11 module to attempt temperature and humidity measurement after the board pinout, wiring and software environment are verified.
 4. Add movement detection if a compatible PIR sensor is available.
 5. Implement fan control only after verifying electrical compatibility.
 6. Develop a Python model that recommends fan operating levels.
@@ -89,9 +89,9 @@ The project will prioritize the purchased fan, available ESP-Claw kit components
 
 ## 9. Current Status and Constraints
 
-The project is in the preparation and hardware-verification stage. The GitHub repository and initial planning documents have been created, and a USB-powered fan has been purchased.
+The project is in the preparation and hardware-verification stage. The GitHub repository and initial planning documents have been created. The currently identified hardware includes a YD-ESP32-S3 Classic V1.0 development board, an ESP32-S3-WROOM-1 module marking (full suffix not yet identified), a user-confirmed DHT11 module, and a USB fan.
 
-The fan's rated voltage, operating current, startup current and exact motor details have not yet been verified. The ESP-Claw kit inventory, exact ESP32 board, sensors and motor-driver availability also remain to be confirmed. Therefore, the final circuit, bill of materials and speed-control method are not yet fixed.
+The fan is rated 5 V / 1 A according to information the user previously confirmed with the seller; these are seller-provided/rated values, not measurements made in this project. Startup/stall current, internal speed-control electronics and external PWM compatibility remain unverified. The exact ESP32 module variant, board pin mapping, remaining kit inventory and motor-driver availability also require verification. Therefore, the final circuit, bill of materials and speed-control method are not yet fixed. No fan load should be connected to an ESP32 GPIO.
 
 ## 10. Acceptance Principle
 
