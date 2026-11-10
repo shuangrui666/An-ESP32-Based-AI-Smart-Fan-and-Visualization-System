@@ -20,7 +20,7 @@ The initial design separates the system into five logical layers:
 4. Python backend and AI
 5. Web dashboard and data visualization
 
-The exact ESP32 board, sensors, driver circuit and power arrangement remain subject to inspection of the ESP-Claw kit and verification of the purchased USB-powered fan.
+The development board has been identified from its marking as YD-ESP32-S3 Classic V1.0, and the module marking is readable as ESP32-S3-WROOM-1 (full suffix pending verification). The user has confirmed that the temperature/humidity module is DHT11. The USB fan is rated 5 V / 1 A according to information previously confirmed by the user with the seller; this is not a project measurement. Exact pin mapping, remaining kit inventory, fan startup current, internal control electronics, external PWM compatibility, driver circuit and power arrangement remain subject to verification.
 
 ## 2. Overall System Architecture
 
@@ -100,14 +100,15 @@ The ESP32 should retain a simple local fallback strategy for loss of backend or 
 
 | Component | Intended responsibility | Current status |
 |---|---|---|
-| ESP32 development board | Sensor acquisition and device control | Exact board model pending kit inspection |
-| Temperature / humidity sensor | Environmental measurements | Exact sensor and availability pending |
-| PIR sensor | Detect movement events | Availability and model pending |
-| USB-powered fan | Airflow output | Purchased; rated voltage/current and startup current not verified |
+| ESP32-S3 development board | Sensor acquisition and device control | Identified from board marking as YD-ESP32-S3 Classic V1.0; pin mapping still to be checked |
+| ESP32-S3 module | Main controller module on the board | Marking readable as ESP32-S3-WROOM-1; full suffix/variant pending verification |
+| Temperature / humidity sensor | Environmental measurements | User-confirmed DHT11, three-pin module marked GND / DATA / VCC; electrical details and live readings not yet tested |
+| PIR sensor | Detect movement events | Availability and model pending kit inventory |
+| USB-powered fan | Airflow output | Purchased; seller-confirmed rated values 5 V / 1 A; startup current and external control capability not verified |
 | Motor driver or switching circuit | Interface between ESP32 and fan power circuit | Not selected; requires fan and driver compatibility checks |
 | Power source and wiring | Supply power and connect modules | Must be confirmed after inspection and electrical verification |
 
-Do not assume that a sensor or driver is included until it has been physically identified.
+The DHT11 module has been identified by user confirmation; its live operation has not yet been tested. Do not assume that a PIR sensor or motor driver is included until it has been physically identified.
 
 ### 3.2 Hardware Block Diagram
 
@@ -375,9 +376,11 @@ The implementation should consider:
 
 | Subsystem | Status | Next verification step |
 |---|---|---|
-| USB-powered fan | Purchased; electrical specifications unverified | Record label/specifications and verify operating requirements |
-| ESP32 board | Pending kit inspection | Identify exact model |
-| Sensors | Pending kit inspection | Record exact models and supported measurements |
+| USB-powered fan | Purchased; seller-confirmed rated values 5 V / 1 A | Verify startup current, internal control electronics and external speed-control compatibility |
+| ESP32 board | Marking identified as YD-ESP32-S3 Classic V1.0 | Verify accurate pinout and board-specific configuration |
+| ESP32-S3 module | Marking readable as ESP32-S3-WROOM-1 | Verify complete suffix/variant from a clear marking or official documentation |
+| Temperature/humidity sensor | User-confirmed DHT11 module | Install required library, verify wiring safely and obtain actual serial readings |
+| Other sensors / driver | Remaining kit inventory not complete | Physically inspect and record exact models before use |
 | Driver / switching circuit | Not selected | Select only after fan and power verification |
 | Firmware | Planned | Begin after board and components are identified |
 | Wi-Fi communication | Proposed | Confirm network and protocol during implementation |
@@ -391,9 +394,9 @@ The implementation should consider:
 
 This document must be updated when the following facts become available:
 
-1. Exact ESP32 board model and supported framework.
-2. Actual sensor inventory and electrical interfaces.
-3. Fan rated voltage, operating current and startup current.
+1. Verify the YD-ESP32-S3 Classic V1.0 board pinout, supported framework and exact ESP32-S3-WROOM-1 module suffix.
+2. Complete the remaining sensor/driver inventory and verify DHT11 electrical interface details.
+3. Independently verify the USB fan's seller-confirmed 5 V / 1 A rating where practical, and determine startup current and internal/external speed-control behavior.
 4. Whether the fan supports external speed control.
 5. Compatible driver and power arrangement.
 6. Final communication protocol, API schema and update interval.
