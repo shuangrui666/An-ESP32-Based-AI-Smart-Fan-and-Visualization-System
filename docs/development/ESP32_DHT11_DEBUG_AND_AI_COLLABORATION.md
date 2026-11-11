@@ -92,14 +92,20 @@ bool DHTSensor::_readData(float& temperature, float& humidity) {
 }
 ```
 
-**问题分析**：
-- 首次调用时 `_lastReadTime = 0`，`currentTime - _lastReadTime` 非常大
-- 但 `_cacheValid` 初始值为 `false`
-- 导致首次读取时进入间隔判断，缓存无效直接返回 `false`
+**⚠️ 技术分析修正**：
 
-**修复方案**：
-- 检查缓存有效性逻辑已正确，但首次读取时应该跳过间隔检查
-- 实际修复：确保首次读取时能正常执行读取逻辑
+原文档对缓存逻辑的分析存在**逻辑矛盾**：
+- 原文声称"首次调用时 `_lastReadTime = 0`，`currentTime - _lastReadTime` 非常大，但又进入了小于 2000 毫秒的判断"
+- **逻辑错误**：大数不可能小于 2000，这是自相矛盾的描述
+
+**真实故障原因**（见阶段四）：
+- 缓存逻辑本身是正确的：首次调用时 `currentTime - _lastReadTime` 确实会大于 2000，因此会跳过缓存判断，直接进入读取逻辑
+- **根本问题**是 `dht_sensor.cpp` 的 `begin()` 函数中**未调用 `_dhtInstance->begin(55)`**，导致 Adafruit DHT 库未完成时序初始化
+- 即使缓存逻辑存在，缺少 `begin(55)` 调用也会导致读取始终失败
+
+**缓存逻辑修复的实际作用**：
+- 缓存逻辑修复（确保首次读取能正常执行）并未解决主程序读取失败的核心问题
+- 主程序读取失败的真正原因是阶段四发现的缺少 `begin(55)` 调用
 
 **修复后的代码**：
 ```cpp
@@ -151,7 +157,7 @@ bool DHTSensor::_readData(float& temperature, float& humidity) {
 // 创建 DHT 对象
 testDHT = new DHT(TEST_DHT_PIN, TEST_DHT_TYPE, 6);
 
-// 关键：调用 begin() 初始化传感器（55us 延迟）
+// 关键：调用 begin() 初始化传感器（设置读取前数据线的上拉等待时间为 55 微秒，即 pullTime）
 testDHT->begin(55);
 
 // 等待传感器稳定
@@ -257,9 +263,23 @@ bool DHTSensor::begin(int pin) {
 
 **问题分析**：
 - Adafruit DHT 库的 `DHT` 类构造函数只设置引脚和类型参数
-- 真正的传感器初始化（包括时序参数设置）需要在 `begin()` 方法中完成
+- 真正的传感器初始化需要在 `begin(uint8_t usec)` 方法中完成
 - 独立测试程序显式调用了 `testDHT->begin(55)`，而主程序封装层遗漏了此调用
-- DHT11 需要 55us 的时序延迟，未初始化导致读取失败
+
+**关于 `begin(55)` 的技术说明**（基于 Adafruit DHT 库官方源码）：
+- `begin(uint8_t usec)` 的参数 `usec` 设置的是 `pullTime`（读取前数据线的上拉等待时间，单位：微秒）
+- **不是**"DHT11 需要 55us 延迟"或"DHT11 专属初始化时序"
+- 55us 是 DHT11 的标准上拉等待时间，DHT22 则需要更长的 1000us
+- 未调用 `begin()` 导致内部 `pullTime` 未初始化，读取时序失败
+
+**官方源码参考**：
+```cpp
+// Adafruit DHT Library: DHT.cpp
+void DHT::begin(uint8_t usec) {
+    _pullTime = usec;  // 设置读取前数据线的上拉等待时间（pull-up time）
+    // ... 其他初始化
+}
+```
 
 ---
 
@@ -280,7 +300,7 @@ bool DHTSensor::begin(int pin) {
     // DHT(uint8_t pin, uint8_t type, uint8_t count = 6)
     _dhtInstance = new DHT(_pin, _type, 6);
 
-    // ✅ 关键：调用 begin() 初始化传感器（DHT11 需要 55us 延迟）
+    // ✅ 关键：调用 begin() 初始化传感器（设置读取前数据线的上拉等待时间为 55 微秒，即 pullTime）
     _dhtInstance->begin(55);
 
     _initialized = true;
@@ -548,8 +568,8 @@ Build 耗时：64.97 秒
 // 构造函数只设置参数，不初始化传感器
 DHT* dht = new DHT(pin, type, count);
 
-// 必须调用 begin() 进行初始化
-dht->begin(55);  // DHT11 需要 55us 延迟
+// 必须调用 begin() 进行初始化（设置读取前数据线的上拉等待时间为 55 微秒）
+dht->begin(55);  // DHT11: 55 微秒上拉等待，DHT22: 1000 微秒上拉等待
 ```
 
 **常见错误**：
@@ -625,18 +645,20 @@ dht->begin(55);  // DHT11 需要 55us 延迟
 ## 📚 参考资料
 
 1. [Adafruit DHT Library GitHub](https://github.com/adafruit/DHT-sensor-library)
-2. [ESP32-S3 技术参考手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf)
-3. [DHT11 数据手册](https://cdn-learn.adafruit.com/assets/100337)
-4. [PlatformIO ESP32 文档](https://docs.platformio.org/en/latest/platforms/espressif32.html)
+2. [Adafruit DHT Library API Source Code](https://github.com/adafruit/DHT-sensor-library/blob/master/DHT.cpp) - `begin(uint8_t usec)` 设置 `pullTime` 参数
+3. [ESP32-S3 技术参考手册](https://www.espressif.com/sites/default/files/documentation/esp32-s3_technical_reference_manual_en.pdf)
+4. [DHT11 数据手册](https://cdn-learn.adafruit.com/assets/100337)
+5. [PlatformIO ESP32 文档](https://docs.platformio.org/en/latest/platforms/espressif32.html)
 
 ---
 
 ## 📄 文档信息
 
-**文档版本**：1.0.0  
+**文档版本**：1.1.0（技术事实审查修订版）  
 **创建日期**：2026-11-11  
 **创建人员**：AI 协作助手  
-**最后更新**：2026-11-11  
+**最后更新**：2026-11-12  
+**修订说明**：完成技术事实审查，修正缓存逻辑分析矛盾、begin(55) 技术描述  
 **维护状态**：持续更新中  
 
 **相关文档**：
