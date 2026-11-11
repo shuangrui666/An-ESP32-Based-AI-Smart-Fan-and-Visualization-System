@@ -195,6 +195,8 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 - Preliminary system architecture document created; hardware-specific details remain pending verification.
 - Purchased USB fan received; rated 5 V / 1 A and brushed-motor description recorded from prior seller confirmation.
 - ESP-Claw kit received; detailed component inventory and exact board/module identification are still in progress.
+- ESP32-S3 development environment established with VS Code and PlatformIO; firmware Build and Upload verified on COM5.
+- DHT11 sensor read verified on GPIO4: independent test reported 22/22 successful reads; after fixing the missing DHT initialization call in the main firmware, the main program reported 25.0 °C and 42.0% RH in consecutive serial outputs. See [EXP-001](experiment/records/2026-11-11/EXP-001-esp32-dht11-validation.md).
 - Experiment log and record templates created.
 
 ### In progress
@@ -204,8 +206,9 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 - Course project evidence mapping and experiment-record improvements.
 
 ### Not yet implemented
-- Verified hardware wiring and fan driver
-- ESP32 firmware
+- Verified fan-driver wiring and fan power/control circuit
+- Temperature-based automatic fan control
+- Wi-Fi communication
 - Python backend and AI model
 - Web dashboard and live data integration
 - Experimental evaluation and final course evidence package
