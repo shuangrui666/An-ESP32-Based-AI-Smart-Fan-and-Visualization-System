@@ -122,7 +122,7 @@ unsigned long getSystemUptime() {
  * 输出当前系统运行状态，包括：
  * - 运行时间
  * - 空闲堆内存
- * - DHT11 温湿度（第二阶段启用）
+ * - DHT11 温湿度
  * - WiFi 状态（后续阶段启用）
  */
 void printSystemStatus() {
