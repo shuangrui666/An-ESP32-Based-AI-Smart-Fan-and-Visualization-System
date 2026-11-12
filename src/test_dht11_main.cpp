@@ -8,7 +8,7 @@
  * - 直接调用 Adafruit DHT 库（绕过封装层）
  * - 初始化后等待 2 秒再开始读取
  * - 每隔 2 秒读取一次温湿度
- * - 输出详细诊断信息（初始化状态、读取结果、错误代码）
+ * - 输出详细诊断信息（初始化过程、读取结果和成功率）
  * 
  * 硬件接线：
  * - DHT11 VCC → ESP32-S3 3.3V
@@ -66,14 +66,14 @@ void setup() {
 
     // 初始化传感器
     Serial.println("[3/4] 初始化 DHT 传感器...");
-    testDHT->begin(55);  // 55us 延迟（DHT11 标准）
+    testDHT->begin(55);  // Adafruit DHT 库的 pullTime 参数；不是 DHT11 专属时序标准
     Serial.println("      ✓ begin() 调用完成");
     delay(100);
 
     Serial.println("[4/4] 初始化完成，等待 2 秒后开始读取...");
-    Serial.println("      (DHT11 需要稳定时间)");
+    Serial.println("      (等待后开始读取，遵守传感器最小采样间隔)");
     
-    // 关键：等待至少 2 秒让传感器稳定
+    // 等待 2 秒后开始循环读取
     delay(2000);
 
     Serial.println("\n========================================");
