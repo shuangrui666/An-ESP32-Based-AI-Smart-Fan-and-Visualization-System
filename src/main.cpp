@@ -8,7 +8,7 @@
  * 本阶段目标：ESP32 基础测试程序
  * - 实现 Serial 串口初始化
  * - 每隔 2 秒打印 ESP32 运行状态信息
- * - 不连接 DHT11 传感器
+ * - 读取 DHT11 温湿度数据
  * - 不连接风扇
  * - 不使用未经确认的 GPIO 引脚
  * 
@@ -122,7 +122,6 @@ unsigned long getSystemUptime() {
  * 输出当前系统运行状态，包括：
  * - 运行时间
  * - 空闲堆内存
- * - CPU 负载
  * - DHT11 温湿度（第二阶段启用）
  * - WiFi 状态（后续阶段启用）
  */
@@ -130,7 +129,6 @@ void printSystemStatus() {
     Serial.println("----------------------------------------");
     Serial.printf("[STATUS] Uptime: %lu seconds\r\n", getSystemUptime());
     Serial.printf("[STATUS] Free Heap: %d bytes\r\n", ESP.getFreeHeap());
-    Serial.printf("[STATUS] CPU Load: %d%%\r\n", 100 - ESP.getCycleCount() % 100);
     Serial.printf("[STATUS] Chip Temp: %.1f °C\r\n", temperatureRead());
     
     // 读取并输出 DHT11 温湿度数据
