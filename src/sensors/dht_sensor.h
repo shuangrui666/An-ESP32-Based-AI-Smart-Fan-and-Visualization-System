@@ -10,7 +10,7 @@
  *
  * 硬件要求：
  * - DHT11 传感器模块
- * - 10k 上拉电阻（DATA 引脚到 VCC）
+ * - DATA 上拉配置需以传感器模块电路为准；不要仅凭模块外观推断是否需要外接电阻
  *
  * 接线说明：
  * - DHT11 VCC → ESP32 3.3V
@@ -46,7 +46,7 @@ public:
     /**
      * 初始化传感器
      * @param pin 数据引脚（默认 DHT_SENSOR_PIN）
-     * @return true 初始化成功，false 失败
+     * @return true 表示驱动初始化流程已执行；不代表传感器已通过实际通信验证
      */
     bool begin(int pin = DHT_SENSOR_PIN);
 
