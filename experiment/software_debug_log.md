@@ -55,6 +55,29 @@
 |---|---|---|---|---|---|
 | BUG-001 | 2026-11-11 | firmware / sensors | 主程序缺少 DHT11 begin(55) 初始化，修复后读取成功 | resolved (current test) | [EXP-001](records/2026-11-11/EXP-001-esp32-dht11-validation.md) |
 
+
+## 2.2 FIND-002：风扇控制器尚未输出真实 PWM，且未接入主程序
+
+- 日期：2026-11-14
+- 关联实验编号：[EXP-002](records/2026-11-14/EXP-002-firmware-fan-control-audit.md)
+- 模块：firmware / control / integration
+- 软件环境：Windows + VS Code / PowerShell + PlatformIO；本次未重新记录工具版本
+- 检查文件：`src/control/fan_controller.cpp`、`src/main.cpp`、`src/sensors/dht_sensor.h`、`src/sensors/dht_sensor.cpp`
+- 问题描述：源码包含风扇档位和 PWM 参数，但实际 PWM 初始化和写入被注释；主程序未发现风扇控制器实例、初始化或档位调用。
+- 实际检查结果：
+  - `FAN_CONTROL_PIN` 的临时默认值为 GPIO21，注释明确要求根据实际情况修改；不能据此直接接线。
+  - `DHT_SENSOR_PIN` 定义为 GPIO4，与此前 DHT11 接线记录一致。
+  - `begin()` 只配置普通 OUTPUT 并拉低；`ledcSetup()`、`ledcAttachPin()` 被注释。
+  - `_updatePWM()` 中 `ledcWrite()` 被注释；实际以 `digitalWrite(HIGH/LOW)` 代替，因此所有非零占空比都会变成持续高电平。
+  - 控制器源码定义 OFF 和 GEAR_1 至 GEAR_5，与项目目标 OFF/1/2/3 档不一致。
+  - `main.cpp` 只初始化 DHT11 和 Wi-Fi；主循环每 2 秒打印状态、每 5 秒上传传感器数据。上传调用使用 `sendSensorData(temperature, humidity, -1)`。本次检查没有发现接收风扇命令的逻辑。
+  - `src/control/fan_controller.h` 不存在；本次没有擅自创建该文件。
+- 初步分析：风扇控制器尚处于未完成/未集成状态；软件档位计算不能代表真实 PWM 输出或真实转速。
+- 最终修改：本次只进行只读审查和记录，没有修改固件源代码。
+- 验证结果：代码现状已通过终端输出确认；真实风扇、驱动电路、PWM 波形和档位转速均未测试。
+- 是否解决：no（这是现状审查记录，不是修复）。
+- 后续事项：先审查 Wi-Fi 通信模块与 Flask API，再确认风扇内部电路和启动电流，确定驱动器及 GPIO；之后才实现并验证真实 PWM 和双向控制。
+
 ## 3. 调试规范
 
 1. 尽量保留完整错误信息，不只记录“程序运行失败”。
