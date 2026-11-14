@@ -8,6 +8,7 @@
 |---|---|---|---|---|---|
 | EXP-001 | 2026-11-11 | ESP32-S3 与 DHT11 温湿度传感器读取验证 | completed | [EXP-001](records/2026-11-11/EXP-001-esp32-dht11-validation.md) | 独立测试 22/22 次成功；修复主程序 DHT 初始化后，串口日志连续两轮读取到 25.0 °C、42.0%；风扇控制尚未测试 |
 | EXP-002 | 2026-11-14 | ESP32 固件现状与风扇控制链路排查 | completed（代码审查） | [EXP-002](records/2026-11-14/EXP-002-firmware-fan-control-audit.md) | 确认 DHT11 使用 GPIO4；风扇控制 GPIO21 仍是临时默认值；PWM 初始化/写入被注释，主程序未调用风扇控制器；真实风扇控制尚未实现。记录为事后补记。
+| EXP-003 | 2026-11-14 | README 项目状态校正与阶段工作记录 | completed（文档校正） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 校正项目真实进度、风扇参数和第11节状态；记录 PowerShell 修改过程与未完成事项。仅为文档工作，不代表实体风扇控制完成。
 
 ## 阶段进度
 
