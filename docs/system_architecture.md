@@ -8,6 +8,14 @@
 
 > **Document status:** This document describes the proposed architecture, not a completed prototype. Hardware models, electrical ratings, wiring, APIs, model results and test outcomes must be updated only after verification.
 
+## Repository implementation snapshot (2026-11-19)
+
+The architecture below remains a **target design**, not a description of a fully integrated implementation. The checked GitHub main snapshot (79b3db7bb2e1dd8b2c3a004e61d6875f17044c04) currently contains DHT11 sensor-reading firmware in src/main.cpp. The current main program does not implement Wi-Fi, HTTP transport, backend command reception, fan control, or dashboard integration. The repository root also has no backend or dashboard source directories.
+
+Earlier experiment/documentation records report Wi-Fi/Flask/dashboard tests in a separate local development state. Until the matching source revision and original runtime evidence are linked into this repository, those results must be treated as historical claims and not as features reproducible from the current GitHub snapshot.
+
+Current hardware facts and unresolved electrical assumptions are tracked in [hardware_inventory.md](../experiment/hardware_inventory.md) and [hardware_connection_log.md](../experiment/hardware_connection_log.md). Test status is tracked in [system_test_log.md](../experiment/system_test_log.md).
+
 ## 1. Purpose and Scope
 
 This document defines the planned system structure, module responsibilities, communication flow, AI decision process, dashboard functions and safety boundaries for SmartFan 2.0.
