@@ -19,7 +19,7 @@
 | 传感器单项测试（DHT11） | completed（历史单测） | EXP-001 记录 GPIO4 读取成功；当前已拆下，重新接线复测待执行 |
 | PIR 单项测试（HC-SR501） | planned | 核实端子顺序、输出电平并完成静止/移动测试 |
 | ESP32 固件测试（当前 GitHub main） | in_progress | 当前主程序含 DHT11 读取；完整回归待执行 |
-| Wi-Fi/后端/前端 | pending_verification | 历史记录有相关陈述，但对应源码和原始证据未在当前仓库快照中，需恢复并复测 |
+| Wi-Fi/后端/前端 | historical_pass_evidence_incomplete | 同期项目记录支持历史链路成功；EXP-004 已归档回溯步骤和证据缺口；原始日志与当前 main 回归测试仍待补 |
 | 风扇控制 | blocked | 驱动模块尚未完成可靠连接，负载和控制兼容性未验证 |
 | AI 模型实验 | planned | 数据来源、划分方式、参数和评价结果可复现 |
 | 整机集成测试 | blocked | 端到端功能和安全测试尚未完成 |
