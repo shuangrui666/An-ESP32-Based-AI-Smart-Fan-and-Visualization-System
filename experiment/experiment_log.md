@@ -10,16 +10,18 @@
 | EXP-002 | 2026-11-14 | ESP32 固件现状与风扇控制链路排查 | completed（代码审查） | [EXP-002](records/2026-11-14/EXP-002-firmware-fan-control-audit.md) | 确认 DHT11 使用 GPIO4；风扇控制 GPIO21 仍是临时默认值；PWM 初始化/写入被注释，主程序未调用风扇控制器；真实风扇控制尚未实现。记录为事后补记。 |
 | EXP-003 | 2026-11-14 | README 项目状态校正与阶段工作记录 | completed（文档校正） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 校正项目真实进度、风扇参数和第11节状态；记录 PowerShell 修改过程与未完成事项。仅为文档工作，不代表实体风扇控制完成。 |
 | EXP-004 | 2026-11-19 | ESP32-S3 Wi-Fi 连接与 Flask HTTP 数据上传验证 | completed（数据上传链路） | [EXP-004](records/2026-11-19/EXP-004-esp32-wifi-http-upload-verification.md) | Flask 日志确认 ESP32 192.168.137.171 向 /api/sensor/data POST 温湿度数据并收到 HTTP 200；断线自动重连、双向控制和长期稳定性仍待验证。 |
+| EXP-005 | 2026-11-19 | MOSFET 驱动模块焊接与初步接线记录 | in_progress（已拍照；未上电、未完成电气核验） | [EXP-005](records/2026-11-19/EXP-005-mosfet-module-preliminary-wiring.md) | 已记录模块焊接和用户报告的初步连接；MOSFET端子拓扑、触发极性、GPIO兼容性及接线安全仍待核实；传感器照片已辨认出DHT11与PIR外观模块，PIR型号待确认。 |
 
 ## 阶段进度
 
 | 阶段 | 状态 | 完成条件 |
 |---|---|---|
-| 硬件清点 | planned | 实际元件、型号、数量和参数均有证据 |
-| 电气与接线设计 | planned | 接线图、引脚表和电源方案经核实 |
+| 硬件清点 | in_progress | 实际元件、型号、数量和参数均有证据；PIR准确型号待确认 |
+| 电气与接线设计 | in_progress | 实际接线已拍照记录；电路拓扑、引脚和电源方案仍待核实 |
 | 传感器单项测试（DHT11） | completed | 本次 GPIO4 温湿度读取验证通过；长期稳定性仍待持续测试 |
 | ESP32 固件测试（基础状态与 DHT11） | completed | 主程序已编译、上传并输出有效温湿度；其他固件功能仍待测试 |
 | Wi-Fi 通信测试（ESP32 → Flask 上传） | completed | 已观察到真实温湿度 POST 请求并收到 HTTP 200；断线恢复和双向通信仍待单独测试 |
+| MOSFET驱动模块装配 | in_progress | 已焊接排针并完成初步接线记录；尚未上电或验证 |
 | 后端测试 | in_progress | 已验证温湿度接收；风扇控制接口仍待实现并验证 |
 | AI 模型实验 | planned | 数据来源、划分方式、参数和评价结果可复现 |
 | 前端与可视化测试 | in_progress | 此前已验证温湿度展示；实时折线图刷新仍需排查；真实风扇控制未验证 |
