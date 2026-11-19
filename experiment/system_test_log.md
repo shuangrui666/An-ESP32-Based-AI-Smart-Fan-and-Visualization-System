@@ -10,7 +10,7 @@
 |---|---|---|---|---|---|
 | TEST-001 | 2026-11-11 | DHT11 独立读取及主程序串口读取 | PASS（历史单项测试） | [EXP-001](records/2026-11-11/EXP-001-esp32-dht11-validation.md) | 记录为事后整理；原始完整串口日志/视频未随记录归档；不代表当前已重新接线 |
 | TEST-002 | 2026-11-14 | GitHub 克隆目录 PlatformIO 编译检查 | PASS（按 EXP-003 记录） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 仅代表当时编译检查；不代表运行时 Wi-Fi、网页或风扇集成 |
-| TEST-003 | 截至 2026-11-14 的历史开发阶段（精确日期待补） | ESP32 Wi-Fi/HTTP、Flask 接收、Web 展示 | PASS（历史记录支持；原始证据不完整） | [EXP-004](records/2026-11-14/EXP-004-wifi-http-flask-web-integration.md)、[EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 同期记录确认曾成功连接、上传真实传感器数据并在网页展示；原始串口/Flask 日志、截图、精确 commit 和 API 参数尚未归档；不代表当前 main 已可复现 |
+| TEST-003 | 截至 2026-11-14 的历史开发阶段（精确日期待补） | ESP32 Wi-Fi/HTTP、Flask 接收、Web 展示 | PASS（历史记录支持；原始证据不完整） | [EXP-004](records/2026-11-14/EXP-004-wifi-http-flask-web-integration.md)、[EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 同期记录支持曾成功连接、上传真实传感器数据并在网页展示；2026-11-19 已核对本地 Wi-Fi/HTTP、Flask、前端代码结构；历史串口/Flask 日志、截图、精确运行 commit、ESP32 实际 BACKEND_URL 和请求体仍未归档；不代表当前 main 已可复现 |
 | TEST-004 | 未执行 | HC-SR501 人体检测 | NOT RUN | 无 | GPIO5 仅为历史配置线索；端子顺序、输出电平和实测均待核实 |
 | TEST-005 | 未执行 | 风扇驱动开关/PWM/档位测试 | BLOCKED | 硬件连接记录 | 驱动模块触发端未安装排针，电气参数和接线未验证 |
 | TEST-006 | 未执行 | 网页到实体风扇的端到端控制 | BLOCKED | 当前源代码和硬件状态 | 当前仓库缺少控制链路源代码，实体风扇未接入 |
