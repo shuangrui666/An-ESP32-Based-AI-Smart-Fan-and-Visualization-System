@@ -9,20 +9,21 @@
 | EXP-001 | 2026-11-11 | ESP32-S3 与 DHT11 温湿度传感器读取验证 | completed | [EXP-001](records/2026-11-11/EXP-001-esp32-dht11-validation.md) | 独立测试 22/22 次成功；修复主程序 DHT 初始化后，串口日志连续两轮读取到 25.0 °C、42.0%；风扇控制尚未测试 |
 | EXP-002 | 2026-11-14 | ESP32 固件现状与风扇控制链路排查 | completed（代码审查） | [EXP-002](records/2026-11-14/EXP-002-firmware-fan-control-audit.md) | 确认 DHT11 使用 GPIO4；风扇控制 GPIO21 仍是临时默认值；PWM 初始化/写入被注释，主程序未调用风扇控制器；真实风扇控制尚未实现。记录为事后补记。
 | EXP-003 | 2026-11-14 | README 项目状态校正与阶段工作记录 | completed（文档校正） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 校正项目真实进度、风扇参数和第11节状态；记录 PowerShell 修改过程与未完成事项。仅为文档工作，不代表实体风扇控制完成。
+| EXP-004 | 2026-11-19（历史测试回溯） | ESP32-S3 Wi-Fi/HTTP、Flask 与 Web 数据链路历史验证及源码核查 | historical_pass_evidence_incomplete | [EXP-004](records/2026-11-14/EXP-004-wifi-http-flask-web-integration.md) | 同期项目记录支持历史联调成功；补充核对本地固件、Flask 与前端代码。原始运行日志、ESP32 实际后端 URL 和请求体仍待补；未重新测试。
 
 ## 阶段进度
 
 | 阶段 | 状态 | 完成条件 |
 |---|---|---|
-| 硬件清点 | planned | 实际元件、型号、数量和参数均有证据 |
+| 硬件清点 | in_progress | 当前器件清单已更新；照片内容、型号细节和关键电气参数仍待逐项核验 |
 | 电气与接线设计 | planned | 接线图、引脚表和电源方案经核实 |
-| 传感器单项测试（DHT11） | completed | 本次 GPIO4 温湿度读取验证通过；长期稳定性仍待持续测试 |
-| ESP32 固件测试（基础状态与 DHT11） | completed | 主程序已编译、上传并输出有效温湿度；其他固件功能仍待测试 |
-| Wi-Fi 通信测试 | in_progress | 此前已验证 ESP32 上传温湿度至 Flask；ESP32 接收后端风扇命令的能力仍待检查 |
-| 后端测试 | in_progress | 此前已验证温湿度接收；风扇控制接口仍待实现并验证 |
+| 传感器单项测试（DHT11） | completed（历史单测） | EXP-001 记录 GPIO4 读取成功；当前已拆下，重新接线复测待执行 |
+| PIR 单项测试（HC-SR501） | planned | 核实端子顺序、输出电平并完成静止/移动测试 |
+| ESP32 固件测试（当前 GitHub main） | in_progress | 当前主程序含 DHT11 读取；完整回归待执行 |
+| Wi-Fi/后端/前端 | historical_pass_evidence_incomplete | 同期项目记录支持历史链路成功；EXP-004 已归档回溯步骤和证据缺口；原始日志与当前 main 回归测试仍待补 |
+| 风扇控制 | blocked | 驱动模块尚未完成可靠连接，负载和控制兼容性未验证 |
 | AI 模型实验 | planned | 数据来源、划分方式、参数和评价结果可复现 |
-| 前端与可视化测试 | in_progress | 此前已验证温湿度展示和风扇未连接/档位未知状态；真实风扇控制未验证 |
-| 整机集成测试 | planned | 端到端功能和安全测试有证据 |
+| 整机集成测试 | blocked | 端到端功能和安全测试尚未完成 |
 
 ## 追加记录格式
 

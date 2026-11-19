@@ -1,8 +1,8 @@
 # SmartFan 2.0
 **An ESP32-Based AI Smart Fan and Visualization System**
 
-> **Project stage:** ESP32-S3 sensor acquisition, Wi-Fi communication, Flask data reception and web visualization verified; physical fan control in development.
-> **Implementation status:** Completed functions are evidence-based. Physical fan control and trained machine-learning functions are not yet implemented.
+> **Project stage (GitHub main snapshot):** DHT11 sensor-reading firmware is present. Wi-Fi/HTTP, Flask, dashboard and physical fan-control source code are not present in the current repository snapshot.
+> **Evidence distinction:** Earlier project records describe Wi-Fi/Flask/dashboard tests in a separate local development state. Those historical results are not reproducible from the current main source tree until the matching source, commit and test evidence are restored or linked. Physical fan control and a trained machine-learning model are not implemented in this repository snapshot.
 
 ## 1. Project Overview
 
@@ -33,9 +33,10 @@ The project will document design decisions, implementation, experiments, limitat
 | Motion detection | Detect movement with a compatible PIR sensor, if available | Pending hardware confirmation |
 | Fan control | Control OFF/LOW/MEDIUM/HIGH levels through a verified driver | Not implemented |
 | AI recommendation | Current recommendation uses rule-based logic; no trained ML model yet | Rule-based prototype |
-| Wi-Fi communication | ESP32-S3 connects to Wi-Fi and uploads sensor data over HTTP | Verified |
-| Web dashboard | Displays real temperature, humidity, charts and device status | Verified |
-| Historical charts | Display sensor data in the web interface | Basic visualization implemented |
+| Wi-Fi communication | Historical records describe ESP32-S3 HTTP upload; current main has no Wi-Fi implementation | Historical claim; absent from current source |
+| Flask backend | Historical records describe receiving sensor readings; backend source is absent from this repository snapshot | Historical claim; not reproducible here |
+| Web dashboard | Historical records describe live readings and charts; frontend source is absent from this repository snapshot | Historical claim; not reproducible here |
+| Historical charts | Historical records describe basic visualization; current repository contains no dashboard source | Not verifiable from current snapshot |
 | AI visualization | Show model structure and evaluation after model training | Not implemented |
 | Offline fallback | ESP32 uses a documented local rule when the computer/network is unavailable | Planned |
 
@@ -119,17 +120,24 @@ If no tachometer or speed sensor is installed, the dashboard will display the **
 
 Detailed tasks and progress are tracked in [docs/project_schedule.md](docs/project_schedule.md). The course-specific evidence mapping and working documents are indexed in [docs/course_project_05/](docs/course_project_05/README.md).
 
-## 8. Repository Structure
+## 8. Repository Structure (GitHub main snapshot)
 
 ~~~text
 .
+├── LICENSE
 ├── README.md
+├── platformio.ini
+├── src/
+│   ├── main.cpp
+│   ├── test_dht11_main.cpp
+│   └── sensors/
 ├── docs/
+│   ├── course_project_05/
+│   ├── development/
+│   ├── images/
 │   ├── project_proposal.md
 │   ├── project_schedule.md
-│   ├── system_architecture.md
-│   └── course_project_05/
-├── docs/images/
+│   └── system_architecture.md
 ├── experiment/
 │   ├── README.md
 │   ├── experiment_log.md
@@ -142,18 +150,10 @@ Detailed tasks and progress are tracked in [docs/project_schedule.md](docs/proje
 ├── evidence/
 │   └── course_project_05/
 ├── data/
-├── diagrams/
-│   └── course_project_05/
-├── hardware/
-├── firmware/
-├── backend/
-├── ai/
-├── dashboard/
-├── visualization/
-└── ai_collaboration/
+└── diagrams/
 ~~~
 
-Directories are populated as real work products are created. Their README index files explain expected evidence; they do not imply that experiments or deliverables are already complete.
+This is the directory structure observed on the checked main snapshot. Backend, dashboard, hardware, firmware, AI and visualization directories are not currently present at the repository root. Historical project notes may refer to separate local folders; those are not represented as current GitHub directories.
 
 ## 9. Experiment Records and Evidence Management
 
@@ -188,7 +188,9 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 
 ## 11. Current Project Status
 
-### Completed
+**Snapshot checked:** GitHub main, commit 79b3db7bb2e1dd8b2c3a004e61d6875f17044c04 (2026-11-14). The source-level statements below describe this repository snapshot, not every earlier local experiment.
+
+### Completed (present in this repository or supported by a linked record)
 - Initial project concept, technical direction, project proposal and development schedule documented.
 - GitHub repository established with project documentation and experiment records.
 - Preliminary system architecture documented; hardware-specific details remain subject to physical verification.
@@ -197,13 +199,12 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 - ESP32-S3 development environment established with VS Code and PlatformIO.
 - Firmware build verified in the current GitHub clone using the `esp32-s3-devkitc-1` environment.
 - DHT11 sensor read verified on GPIO4: independent test reported 22/22 successful reads; the main firmware subsequently reported temperature and humidity readings in serial output. See [EXP-001](experiment/records/2026-11-11/EXP-001-esp32-dht11-validation.md).
-- ESP32-S3 successfully connected to Wi-Fi and uploaded sensor data to the computer over HTTP.
-- Flask backend successfully received actual sensor readings from the ESP32-S3.
-- Web dashboard displayed actual temperature, humidity, charts and device online status.
-- A rule-based recommendation prototype was displayed in the web interface; this is not a trained machine-learning model.
+- Historical development records report ESP32-S3 Wi-Fi/HTTP upload, Flask reception and dashboard display in a separate local development state. These are retained as historical project claims, but the matching backend/frontend source, exact commit and original runtime evidence are not included in this repository snapshot; they are therefore not counted as currently reproducible GitHub features.
+- EXP-003 records that the GitHub clone compiled in the esp32-s3-devkitc-1 environment; this is a build record, not proof of Wi-Fi, backend, dashboard or fan integration.
 - Experiment log and record templates created.
 
 ### In progress
+- Reconcile the historical Wi-Fi/Flask/dashboard implementation with the current GitHub source tree, or restore the matching source and reproducible evidence.
 - Verify the fan's internal electrical structure, motor type, startup current and compatibility with external speed control.
 - Select and verify a suitable fan driver and safe power/control circuit.
 - Implement and test physical fan ON/OFF and three-level speed control.
