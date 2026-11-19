@@ -7,19 +7,21 @@
 
 ## 1. Objective
 
-Preserve the actual hardware assembly state and wiring progress before any powered fan-driver test.
+Preserve the actual hardware assembly state and wiring progress before any powered fan-driver test. This record also links the earlier PIR module identification photograph supplied on 2026-11-14.
 
-## 2. Hardware inventory visible in the 2026-11-19 photographs
+## 2. Hardware inventory
 
 | Component | Identification | Status |
 |---|---|---|
 | Controller | ESP32-S3 development board; board marking visible as VO-ESP32-S3 | Present; GPIO allocation still requires firmware audit |
 | Temperature/humidity sensor | DHT11 module (blue vented housing) | GPIO4 was previously validated in EXP-001 |
-| Motion sensor | PIR-type module with white Fresnel dome | Present; exact model/board marking not readable in current photos; wiring and operation not verified |
+| Motion sensor | PIR module with white Fresnel dome, two adjustment potentiometers and a mode jumper | Appearance is consistent with HC-SR501 or a compatible clone; exact manufacturer/model marking is not visible; wiring and operation not verified |
 | Fan | USB-powered desktop fan, rear mechanical switch visible | Present; manual rating previously recorded as 5 V / 2.5 W |
 | Driver | Blue dual-MOSFET PWM/electronic switch module | Board labels visible: TRIG/PWM, GND, VIN−, VIN+, VOUT−, VOUT+; exact circuit topology and input behavior still require confirmation |
 
-No other sensor is claimed as identified from these photographs. In particular, the PIR module's exact model number is not established by appearance alone.
+### 2.1 Additional component visible in the earlier photograph
+
+A red board marked "Water Sensor" is visible in the background of the 2026-11-14 PIR photograph. It is identified as a water-sensor module by its board marking, but the available evidence does not establish that it is connected to or used by the SmartFan 2.0 build. It is therefore recorded as an observed component only, not as an integrated project sensor.
 
 ## 3. Assembly and wiring work reported by the user
 
@@ -39,7 +41,8 @@ These are user-reported connections. The photographs provide visual evidence of 
 - The control header labels include TRIG/PWM and GND. The exact polarity and electrical requirements of the control input are not yet established.
 - GPIO6 is a candidate control pin based on the current wiring, not yet confirmed free of conflicts in the complete local firmware project.
 - GPIO5 is a candidate PIR signal pin, not yet confirmed free of conflicts.
-- The white-dome sensor is identified only as PIR-type; exact model and supply/output voltage remain pending confirmation.
+- The PIR photograph dated 2026-11-14 shows a white Fresnel dome, two adjustment potentiometers and a mode jumper. This is consistent with an HC-SR501-style PIR module, but the exact model is not conclusively confirmed by a readable model marking.
+- The PIR supply voltage and OUT signal voltage remain unverified.
 
 ## 5. Safety hold point
 
@@ -55,15 +58,16 @@ Before power-on:
 
 ## 6. Evidence captured
 
-Photographs supplied by the user in this conversation on 2026-11-19:
-- Overall view of fan, ESP32-S3, DHT11/PIR modules and MOSFET driver.
-- Close-up of MOSFET terminal labels and conductors.
-- Fan rear switch and cable.
-- ESP32-S3 board and connected jumper leads.
-- Earlier breadboard/sensor arrangement photographed on 2026-11-18.
+Photographs supplied by the user:
+- 2026-11-14 19:33: close-up of the PIR module, showing its Fresnel dome, two adjustment potentiometers and mode jumper; a separate red board marked "Water Sensor" is visible in the background.
+- 2026-11-19: overall view of fan, ESP32-S3, DHT11/PIR modules and MOSFET driver.
+- 2026-11-19: close-up of MOSFET terminal labels and conductors.
+- 2026-11-19: fan rear switch and cable.
+- 2026-11-19: ESP32-S3 board and connected jumper leads.
+- 2026-11-18: earlier breadboard/sensor arrangement.
 
 The original image files still need to be committed to the repository's evidence directory; this record does not claim that binary image files have already been uploaded.
 
 ## 7. Conclusion
 
-The module header soldering and preliminary wiring have been reported and photographed. This is an assembly-progress record only. No powered test, fan operation test, PWM test, voltage/current measurement or electrical compatibility test has been performed. The circuit remains unpowered pending review.
+The module header soldering and preliminary wiring have been reported and photographed. The PIR module's appearance is consistent with an HC-SR501-style board, but its exact model and electrical specifications remain unconfirmed. The Water Sensor board is only observed in the background and is not counted as an integrated SmartFan sensor. This is an assembly-progress record only. No powered test, fan operation test, PWM test, voltage/current measurement or electrical compatibility test has been performed. The circuit remains unpowered pending review.
