@@ -1,8 +1,8 @@
 # SmartFan 2.0
 **An ESP32-Based AI Smart Fan and Visualization System**
 
-> **Project stage:** Hardware received; inventory and electrical verification in progress  
-> **Implementation status:** Planned functions are not yet verified on the physical prototype.
+> **Project stage:** ESP32-S3 sensor acquisition, Wi-Fi communication, Flask data reception and web visualization verified; physical fan control in development.
+> **Implementation status:** Completed functions are evidence-based. Physical fan control and trained machine-learning functions are not yet implemented.
 
 ## 1. Project Overview
 
@@ -29,14 +29,14 @@ The project will document design decisions, implementation, experiments, limitat
 
 | Feature | Planned behavior | Status |
 |---|---|---|
-| Environmental monitoring | Display measured temperature and humidity when supported by the selected sensor | Planned |
+| Environmental monitoring | DHT11 displays measured temperature and humidity through the system | Verified |
 | Motion detection | Detect movement with a compatible PIR sensor, if available | Pending hardware confirmation |
-| Fan control | Control OFF/LOW/MEDIUM/HIGH levels if the fan and driver support reliable control | Pending electrical verification |
-| AI recommendation | Python model recommends a fan operating level | Planned |
-| Wi-Fi communication | Exchange data and commands between ESP32 and computer | Planned |
-| Web dashboard | Show current readings, device status and control mode | Planned |
-| Historical charts | Plot sensor readings, activity events and fan command history | Planned |
-| AI visualization | Show decision-tree structure and evaluation results after model training | Planned |
+| Fan control | Control OFF/LOW/MEDIUM/HIGH levels through a verified driver | Not implemented |
+| AI recommendation | Current recommendation uses rule-based logic; no trained ML model yet | Rule-based prototype |
+| Wi-Fi communication | ESP32-S3 connects to Wi-Fi and uploads sensor data over HTTP | Verified |
+| Web dashboard | Displays real temperature, humidity, charts and device status | Verified |
+| Historical charts | Display sensor data in the web interface | Basic visualization implemented |
+| AI visualization | Show model structure and evaluation after model training | Not implemented |
 | Offline fallback | ESP32 uses a documented local rule when the computer/network is unavailable | Planned |
 
 ## 4. Course Project Requirements and Deliverable Mapping
@@ -68,7 +68,7 @@ Candidate components include:
 - Motor driver selected only after fan voltage, current, startup behavior and control method are verified
 - Optional display or RGB indicator if included in the kit
 
-The purchased fan's rated voltage and rated current have been confirmed as 5 V and 1 A, and the seller described it as a brushed DC motor. Startup current, internal control circuitry and reliable external speed-control compatibility remain to be verified. The rated current must not be treated as the startup current.
+The fan manual specifies a rated voltage of 5 V and rated power of 2.5 W. The nominal current derived from P/V is approximately 0.5 A. A seller mentioned 1 A, but it has not been confirmed whether this refers to rated current, maximum current or an adapter specification. The motor type, internal control circuitry, startup current and reliable external speed-control compatibility remain unverified.
 
 ### 5.2 Firmware and communication
 
@@ -189,29 +189,35 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 ## 11. Current Project Status
 
 ### Completed
-- Initial project concept and technical direction documented.
-- GitHub repository created.
-- Initial README, project proposal and development schedule drafted.
-- Preliminary system architecture document created; hardware-specific details remain pending verification.
-- Purchased USB fan received; rated 5 V / 1 A and brushed-motor description recorded from prior seller confirmation.
-- ESP-Claw kit received; detailed component inventory and exact board/module identification are still in progress.
-- ESP32-S3 development environment established with VS Code and PlatformIO; firmware Build and Upload verified on COM5.
-- DHT11 sensor read verified on GPIO4: independent test reported 22/22 successful reads; after fixing the missing DHT initialization call in the main firmware, the main program reported 25.0 °C and 42.0% RH in consecutive serial outputs. See [EXP-001](experiment/records/2026-11-11/EXP-001-esp32-dht11-validation.md).
+- Initial project concept, technical direction, project proposal and development schedule documented.
+- GitHub repository established with project documentation and experiment records.
+- Preliminary system architecture documented; hardware-specific details remain subject to physical verification.
+- USB fan received. The manual specifies 5 V and 2.5 W; motor type, startup current and external speed-control compatibility remain unverified.
+- YD-ESP32-S3 Classic V1.0 development board used for firmware development.
+- ESP32-S3 development environment established with VS Code and PlatformIO.
+- Firmware build verified in the current GitHub clone using the `esp32-s3-devkitc-1` environment.
+- DHT11 sensor read verified on GPIO4: independent test reported 22/22 successful reads; the main firmware subsequently reported temperature and humidity readings in serial output. See [EXP-001](experiment/records/2026-11-11/EXP-001-esp32-dht11-validation.md).
+- ESP32-S3 successfully connected to Wi-Fi and uploaded sensor data to the computer over HTTP.
+- Flask backend successfully received actual sensor readings from the ESP32-S3.
+- Web dashboard displayed actual temperature, humidity, charts and device online status.
+- A rule-based recommendation prototype was displayed in the web interface; this is not a trained machine-learning model.
 - Experiment log and record templates created.
 
 ### In progress
-- Physical inventory and photography of the received kit and fan.
-- Verification of ESP32 board model, sensor models and available driver/power components.
-- Verification of fan startup current, internal control circuitry and external control compatibility.
-- Course project evidence mapping and experiment-record improvements.
+- Verify the fan's internal electrical structure, motor type, startup current and compatibility with external speed control.
+- Select and verify a suitable fan driver and safe power/control circuit.
+- Implement and test physical fan ON/OFF and three-level speed control.
+- Improve hardware inspection records, circuit diagrams and course project evidence.
+- Complete repository documentation and final evidence organization.
 
 ### Not yet implemented
-- Verified fan-driver wiring and fan power/control circuit
-- Temperature-based automatic fan control
-- Wi-Fi communication
-- Python backend and AI model
-- Web dashboard and live data integration
-- Experimental evaluation and final course evidence package
+- Verified physical fan-driver wiring and actual fan speed control.
+- Reliable OFF/LOW/MEDIUM/HIGH control through the web dashboard.
+- Closed-loop or temperature-based automatic fan control using the physical fan.
+- A trained and evaluated machine-learning model.
+- Model structure and evaluation visualization based on an actual trained model.
+- Verified offline fallback behavior on the physical prototype.
+- Final experimental evaluation and complete course evidence package.
 
 ## 12. Evidence-Based Development
 
