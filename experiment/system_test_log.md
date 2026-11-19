@@ -10,7 +10,7 @@
 |---|---|---|---|---|---|
 | TEST-001 | 2026-11-11 | DHT11 独立读取及主程序串口读取 | PASS（历史单项测试） | [EXP-001](records/2026-11-11/EXP-001-esp32-dht11-validation.md) | 记录为事后整理；原始完整串口日志/视频未随记录归档；不代表当前已重新接线 |
 | TEST-002 | 2026-11-14 | GitHub 克隆目录 PlatformIO 编译检查 | PASS（按 EXP-003 记录） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 仅代表当时编译检查；不代表运行时 Wi-Fi、网页或风扇集成 |
-| TEST-003 | 历史日期待补 | ESP32 Wi-Fi/HTTP、Flask 接收、Web 展示 | PENDING EVIDENCE | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) 中的历史陈述 | 当前 GitHub main 不含对应 Wi-Fi、HTTP、Flask 或 Dashboard 源码；未提供可复现提交和原始运行证据，暂不计入当前仓库通过项 |
+| TEST-003 | 截至 2026-11-14 的历史开发阶段（精确日期待补） | ESP32 Wi-Fi/HTTP、Flask 接收、Web 展示 | PASS（历史记录支持；原始证据不完整） | [EXP-004](records/2026-11-14/EXP-004-wifi-http-flask-web-integration.md)、[EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 同期记录确认曾成功连接、上传真实传感器数据并在网页展示；原始串口/Flask 日志、截图、精确 commit 和 API 参数尚未归档；不代表当前 main 已可复现 |
 | TEST-004 | 未执行 | HC-SR501 人体检测 | NOT RUN | 无 | GPIO5 仅为历史配置线索；端子顺序、输出电平和实测均待核实 |
 | TEST-005 | 未执行 | 风扇驱动开关/PWM/档位测试 | BLOCKED | 硬件连接记录 | 驱动模块触发端未安装排针，电气参数和接线未验证 |
 | TEST-006 | 未执行 | 网页到实体风扇的端到端控制 | BLOCKED | 当前源代码和硬件状态 | 当前仓库缺少控制链路源代码，实体风扇未接入 |
@@ -22,9 +22,9 @@
 
 - src/main.cpp 包含 Arduino 初始化、DHT11 初始化及温湿度串口输出。
 - 当前主程序没有 Wi-Fi 初始化、HTTP 上传、后端命令接收或风扇控制调用。
-- 根目录当前没有 backend/ 或 dashboard/ 源代码目录。
+- 本次本地目录扫描已确认两个本地工作目录中存在 backend/、frontend/ 及 Wi-Fi 通信源码；但本节检查基准是历史远程 main 提交 79b3db7，不能用该旧快照的目录缺失推翻历史成功测试。
 - platformio.ini 的 build_src_filter 引用了 ai/、communication/、control/，但当前 src/ 树中未发现对应目录。
-- 因此，不能仅凭旧实验记录将 Wi-Fi、Flask、Dashboard 或风扇控制标为当前 GitHub 快照可复现的通过项。
+- 因此，TEST-003 的历史功能结果与当前远程 main 的可复现性必须分开判定：历史链路记为 PASS（历史记录支持）；当前 main 的完整复现状态仍待核验。此结论不延伸到风扇实体控制。
 
 ## 3. 建议测试范围与当前状态
 
@@ -33,9 +33,9 @@
 | DHT11 单测 | 读取有效性、单位、异常值处理、重新接线复测 | 历史单项测试通过；复测待执行 |
 | PIR 单测 | 静止/移动触发、延时、重复触发 | NOT RUN |
 | ESP32 固件 | 当前分支编译、启动、传感器读取 | 编译检查有历史记录；完整回归待执行 |
-| Wi-Fi 通信 | 连接、HTTP 上传、断连恢复 | 当前仓库缺少实现；待恢复代码并复测 |
-| 后端 | API 输入校验、存储、错误处理 | 当前仓库缺少后端源代码；待恢复代码并复测 |
-| 前端 | 数据显示、状态更新、控制反馈 | 当前仓库缺少 Dashboard 源代码；待恢复代码并复测 |
+| Wi-Fi 通信 | 连接、HTTP 上传、断连恢复 | 连接与 HTTP 上传有历史成功记录；断连恢复未确认；当前 main 复现待核验 |
+| 后端 | API 输入校验、存储、错误处理 | Flask 接收真实传感器数据有历史成功记录；API 校验、持久化与错误处理未单独验证 |
+| 前端 | 数据显示、状态更新、控制反馈 | 实际温湿度、图表和设备状态有历史显示成功记录；网页到实体风扇控制未验证 |
 | 风扇驱动 | 开关、PWM、档位、异常保护 | BLOCKED |
 | AI | 训练数据、划分、模型输出、指标 | NOT RUN |
 | 整机 | 端到端运行、重复性、稳定性 | BLOCKED |
