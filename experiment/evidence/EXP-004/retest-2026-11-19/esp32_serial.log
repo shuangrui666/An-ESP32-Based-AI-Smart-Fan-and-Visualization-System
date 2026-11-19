@@ -1,0 +1,108 @@
+[2026-11-19T11:06:23.948] [WifiManager] Status: Connecting... -> Connected
+[2026-11-19T11:06:23.948] [WifiManager] Connected!
+[2026-11-19T11:06:23.949] [WifiManager] IP: 192.168.137.171
+[2026-11-19T11:06:23.950] [WifiManager] RSSI: -26 dBm
+[2026-11-19T11:06:23.950] [INIT] Wi-Fi connected successfully
+[2026-11-19T11:06:23.951] [WiFi] IP Address: 192.168.137.171
+[2026-11-19T11:06:23.952] [WiFi] Backend URL: http://192.168.137.1:5000
+[2026-11-19T11:06:23.953] ----------------------------------------
+[2026-11-19T11:06:23.953] [STATUS] Uptime: 47 seconds
+[2026-11-19T11:06:23.953] [STATUS] Free Heap: 254048 bytes
+[2026-11-19T11:06:23.954] [STATUS] CPU Load: 98%
+[2026-11-19T11:06:23.955] [STATUS] Chip Temp: 37.0 °C
+[2026-11-19T11:06:23.976] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:23.976] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:23.977] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:23.977] ----------------------------------------
+[2026-11-19T11:06:23.978] [UPLOAD] Sending: temperature=23.2 C, humidity=51.0 %
+[2026-11-19T11:06:23.979] [WifiManager] Sending data to http://192.168.137.1:5000/api/sensor/data
+[2026-11-19T11:06:23.980] [WifiManager] Payload: {"temperature":23.20,"humidity":51.00,"fan_gear":-1}
+[2026-11-19T11:06:24.195] [WifiManager] Data sent successfully
+[2026-11-19T11:06:24.196] [UPLOAD] Sensor data uploaded successfully
+[2026-11-19T11:06:25.996] ----------------------------------------
+[2026-11-19T11:06:25.996] [STATUS] Uptime: 49 seconds
+[2026-11-19T11:06:25.997] [STATUS] Free Heap: 253112 bytes
+[2026-11-19T11:06:25.997] [STATUS] CPU Load: 86%
+[2026-11-19T11:06:25.998] [STATUS] Chip Temp: 36.0 °C
+[2026-11-19T11:06:26.022] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:26.022] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:26.022] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:26.023] ----------------------------------------
+[2026-11-19T11:06:28.022] ----------------------------------------
+[2026-11-19T11:06:28.022] [STATUS] Uptime: 51 seconds
+[2026-11-19T11:06:28.023] [STATUS] Free Heap: 253112 bytes
+[2026-11-19T11:06:28.023] [STATUS] CPU Load: 71%
+[2026-11-19T11:06:28.024] [STATUS] Chip Temp: 37.0 °C
+[2026-11-19T11:06:28.048] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:28.048] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:28.049] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:28.049] ----------------------------------------
+[2026-11-19T11:06:28.948] [UPLOAD] Sending: temperature=23.2 C, humidity=51.0 %
+[2026-11-19T11:06:28.949] [WifiManager] Sending data to http://192.168.137.1:5000/api/sensor/data
+[2026-11-19T11:06:28.950] [WifiManager] Payload: {"temperature":23.20,"humidity":51.00,"fan_gear":-1}
+[2026-11-19T11:06:29.356] [WifiManager] Data sent successfully
+[2026-11-19T11:06:29.357] [UPLOAD] Sensor data uploaded successfully
+[2026-11-19T11:06:30.056] ----------------------------------------
+[2026-11-19T11:06:30.057] [STATUS] Uptime: 53 seconds
+[2026-11-19T11:06:30.058] [STATUS] Free Heap: 253112 bytes
+[2026-11-19T11:06:30.058] [STATUS] CPU Load: 20%
+[2026-11-19T11:06:30.058] [STATUS] Chip Temp: 37.0 °C
+[2026-11-19T11:06:30.083] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:30.083] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:30.084] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:30.084] ----------------------------------------
+[2026-11-19T11:06:32.082] ----------------------------------------
+[2026-11-19T11:06:32.083] [STATUS] Uptime: 55 seconds
+[2026-11-19T11:06:32.083] [STATUS] Free Heap: 253160 bytes
+[2026-11-19T11:06:32.084] [STATUS] CPU Load: 9%
+[2026-11-19T11:06:32.084] [STATUS] Chip Temp: 35.0 °C
+[2026-11-19T11:06:32.109] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:32.110] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:32.110] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:32.111] ----------------------------------------
+[2026-11-19T11:06:34.010] [UPLOAD] Sending: temperature=23.2 C, humidity=51.0 %
+[2026-11-19T11:06:34.011] [WifiManager] Sending data to http://192.168.137.1:5000/api/sensor/data
+[2026-11-19T11:06:34.013] [WifiManager] Payload: {"temperature":23.20,"humidity":51.00,"fan_gear":-1}
+[2026-11-19T11:06:34.424] [WifiManager] Data sent successfully
+[2026-11-19T11:06:34.425] [UPLOAD] Sensor data uploaded successfully
+[2026-11-19T11:06:34.525] ----------------------------------------
+[2026-11-19T11:06:34.525] [STATUS] Uptime: 58 seconds
+[2026-11-19T11:06:34.526] [STATUS] Free Heap: 252972 bytes
+[2026-11-19T11:06:34.527] [STATUS] CPU Load: 84%
+[2026-11-19T11:06:34.528] [STATUS] Chip Temp: 37.0 °C
+[2026-11-19T11:06:34.551] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:34.552] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:34.552] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:34.553] ----------------------------------------
+[2026-11-19T11:06:36.551] ----------------------------------------
+[2026-11-19T11:06:36.552] [STATUS] Uptime: 60 seconds
+[2026-11-19T11:06:36.553] [STATUS] Free Heap: 253160 bytes
+[2026-11-19T11:06:36.553] [STATUS] CPU Load: 38%
+[2026-11-19T11:06:36.554] [STATUS] Chip Temp: 36.0 °C
+[2026-11-19T11:06:36.578] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:36.579] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:36.580] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:36.580] ----------------------------------------
+[2026-11-19T11:06:38.578] ----------------------------------------
+[2026-11-19T11:06:38.578] [STATUS] Uptime: 62 seconds
+[2026-11-19T11:06:38.579] [STATUS] Free Heap: 253112 bytes
+[2026-11-19T11:06:38.579] [STATUS] CPU Load: 77%
+[2026-11-19T11:06:38.579] [STATUS] Chip Temp: 37.0 °C
+[2026-11-19T11:06:38.604] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:38.604] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:38.605] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:38.606] ----------------------------------------
+[2026-11-19T11:06:39.104] [UPLOAD] Sending: temperature=23.2 C, humidity=51.0 %
+[2026-11-19T11:06:39.105] [WifiManager] Sending data to http://192.168.137.1:5000/api/sensor/data
+[2026-11-19T11:06:39.106] [WifiManager] Payload: {"temperature":23.20,"humidity":51.00,"fan_gear":-1}
+[2026-11-19T11:06:39.418] [WifiManager] Data sent successfully
+[2026-11-19T11:06:39.419] [UPLOAD] Sensor data uploaded successfully
+[2026-11-19T11:06:40.618] ----------------------------------------
+[2026-11-19T11:06:40.619] [STATUS] Uptime: 64 seconds
+[2026-11-19T11:06:40.620] [STATUS] Free Heap: 253160 bytes
+[2026-11-19T11:06:40.620] [STATUS] CPU Load: 40%
+[2026-11-19T11:06:40.621] [STATUS] Chip Temp: 36.0 °C
+[2026-11-19T11:06:40.645] [DHTSensor] Read OK: temp=23.2°C, hum=51.0%
+[2026-11-19T11:06:40.645] [DHT11] Temperature: 23.2 °C
+[2026-11-19T11:06:40.646] [DHT11] Humidity: 51.0 %
+[2026-11-19T11:06:40.646] ----------------------------------------
