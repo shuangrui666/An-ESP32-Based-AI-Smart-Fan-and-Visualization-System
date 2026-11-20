@@ -2,28 +2,50 @@
 
 - Experiment: EXP-005 — MOSFET driver module assembly and preliminary wiring
 - Experiment date: 2026-11-19
-- Status: evidence index created; original image files are **not yet present in this repository**.
+- Status: original image files uploaded; detailed photo-to-evidence mapping is partially pending.
+
+## Uploaded original image files
+
+The following 10 JPG files are present in this directory on the `main` branch:
+
+| File | Capture timestamp inferred from filename | Status |
+|---|---|---|
+| `IMG_20261109_174544.jpg` | 2026-11-09 17:45:44 | Uploaded; content-to-event mapping pending |
+| `IMG_20261109_174550.jpg` | 2026-11-09 17:45:50 | Uploaded; content-to-event mapping pending |
+| `IMG_20261109_183936.jpg` | 2026-11-09 18:39:36 | Uploaded; content-to-event mapping pending |
+| `IMG_20261114_113048.jpg` | 2026-11-14 11:30:48 | Uploaded; content-to-event mapping pending |
+| `IMG_20261114_193135.jpg` | 2026-11-14 19:31:35 | Uploaded; likely related to the previously discussed PIR evidence; exact mapping requires visual confirmation |
+| `IMG_20261118_181921.jpg` | 2026-11-18 18:19:21 | Uploaded; likely historical breadboard/sensor setup; exact mapping requires visual confirmation |
+| `IMG_20261119_095756.jpg` | 2026-11-19 09:57:56 | Uploaded; content-to-event mapping pending |
+| `IMG_20261119_175636.jpg` | 2026-11-19 17:56:36 | Uploaded; content-to-event mapping pending |
+| `IMG_20261119_175650.jpg` | 2026-11-19 17:56:50 | Uploaded; content-to-event mapping pending |
+| `_cgi-bin_mmwebwx-bin_webwxgetmsgimg__&MsgID=7263387889681310891&skey=@crypt_220c0a15_b198ba3680cbc8a026ab7936aa9468e4&mmweb_appid=wx_webfilehelper.jpg` | Not reliably inferable from filename | Uploaded; filename retained from source; content/date mapping pending |
+| `_cgi-bin_mmwebwx-bin_webwxgetmsgimg__&MsgID=8964425806593660555&skey=@crypt_220c0a15_b198ba3680cbc8a026ab7936aa9468e4&mmweb_appid=wx_webfilehelper.jpg` | Not reliably inferable from filename | Uploaded; filename retained from source; content/date mapping pending |
 
 ## Evidence register
 
-| Evidence ID | Original capture / source date | Description | Current repository status | Notes |
-|---|---|---|---|---|
-| EXP005-PHOTO-001 | 2026-11-14 19:33 (as visible in the previously shared image) | PIR module close-up; white Fresnel lens, two adjustment potentiometers and mode jumper; a separate board marked “Water Sensor” appears in the background | Not uploaded as an image file | Visual appearance is consistent with an HC-SR501-style PIR module; exact model is not confirmed |
-| EXP005-PHOTO-002 | 2026-11-19 | Overall assembly view showing ESP32-S3, DHT11/PIR modules, fan and driver module | Not uploaded as an image file | Referenced in the experiment record |
-| EXP005-PHOTO-003 | 2026-11-19 | MOSFET driver terminal and conductor close-up | Not uploaded as an image file | Terminal labels and wiring arrangement were documented; electrical correctness is not established |
-| EXP005-PHOTO-004 | 2026-11-19 | Fan rear switch and cable | Not uploaded as an image file | No powered test is claimed |
-| EXP005-PHOTO-005 | 2026-11-19 | ESP32-S3 board and connected jumper leads | Not uploaded as an image file | GPIO assignments remain subject to firmware audit |
-| EXP005-PHOTO-006 | 2026-11-18 | Earlier breadboard/sensor arrangement | Not uploaded as an image file | Historical assembly-state evidence; do not treat as current wiring |
+| Evidence ID | Intended evidence description | File mapping |
+|---|---|---|
+| EXP005-PHOTO-001 | PIR module close-up; white Fresnel lens, two adjustment potentiometers and mode jumper; a separate board marked “Water Sensor” appears in the background | Candidate: `IMG_20261114_193135.jpg`; visual confirmation pending |
+| EXP005-PHOTO-002 | Overall assembly view showing ESP32-S3, DHT11/PIR modules, fan and driver module | Candidate among 2026-11-19 images; exact mapping pending |
+| EXP005-PHOTO-003 | MOSFET driver terminal and conductor close-up | Candidate among 2026-11-19 images; exact mapping pending |
+| EXP005-PHOTO-004 | Fan rear switch and cable | Candidate among 2026-11-19 images; exact mapping pending |
+| EXP005-PHOTO-005 | ESP32-S3 board and connected jumper leads | Candidate among 2026-11-19 images; exact mapping pending |
+| EXP005-PHOTO-006 | Earlier breadboard/sensor arrangement | Candidate: `IMG_20261118_181921.jpg`; visual confirmation pending |
 
 ## Sensor inventory supported by current records
 
 - DHT11 temperature/humidity module: previously tested on GPIO4; see EXP-001.
 - PIR motion sensor module: photographed previously; appearance is consistent with an HC-SR501-style module, but exact model and electrical specifications are unconfirmed.
-- A separate red board marked “Water Sensor” is visible in the 2026-11-14 photograph. It is recorded as an observed component only, not as an integrated SmartFan sensor.
+- A separate red board marked “Water Sensor” is visible in the previously discussed 2026-11-14 photograph. It is recorded as an observed component only, not as an integrated SmartFan sensor.
 
-## Evidence integrity note
+## Evidence integrity and naming notes
 
-This index preserves the descriptions and provenance currently available from the conversation record. It does **not** contain the original binary photographs. No image file is claimed to have been uploaded. If original image files become available later, add them without altering the historical descriptions, and record their original capture dates and SHA-256 hashes.
+- The image directory contains 10 JPG files. The original files are retained; no image content has been edited by this index update.
+- The two files beginning `_cgi-bin_mmwebwx-bin_webwxgetmsgimg__` have source-generated filenames that are not suitable as long-term evidence identifiers. They are intentionally left unchanged until their contents and provenance are confirmed; rename them only after recording the mapping.
+- Timestamps above are inferred from filenames, not independently verified EXIF metadata.
+- The six evidence IDs preserve the earlier conversation-based descriptions. Exact file-to-ID mapping remains pending where explicitly stated.
+- SHA-256 hashes have not yet been recorded in this index.
 
 ## Safety / verification boundary
 
