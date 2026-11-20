@@ -11,6 +11,7 @@
 | EXP-003 | 2026-11-14 | README 项目状态校正与阶段工作记录 | completed（文档校正） | [EXP-003](records/2026-11-14/EXP-003-readme-status-reconciliation.md) | 校正项目真实进度、风扇参数和第11节状态；记录 PowerShell 修改过程与未完成事项。仅为文档工作，不代表实体风扇控制完成。 |
 | EXP-004 | 2026-11-19 | ESP32-S3 Wi-Fi 连接与 Flask HTTP 数据上传验证 | completed（数据上传链路） | [EXP-004](records/2026-11-19/EXP-004-esp32-wifi-http-upload-verification.md) | Flask 日志确认 ESP32 192.168.137.171 向 /api/sensor/data POST 温湿度数据并收到 HTTP 200；断线自动重连、双向控制和长期稳定性仍待验证。 |
 | EXP-005 | 2026-11-19 | MOSFET 驱动模块焊接与初步接线记录 | in_progress（已拍照；未上电、未完成电气核验） | [EXP-005](records/2026-11-19/EXP-005-mosfet-module-preliminary-wiring.md) | 已记录模块焊接和用户报告的初步连接；MOSFET端子拓扑、触发极性、GPIO兼容性及接线安全仍待核实；传感器照片已辨认出DHT11与PIR外观模块，PIR型号待确认。 |
+| EXP-006 | 2026-11-20 | MOSFET 与 PIR 电气安全审查 | in_progress（部分核对通过；仍有上电前检查项） | [EXP-006](records/2026-11-20/EXP-006-mosfet-pir-electrical-safety-review.md) | 商品参数与同系列模块资料相符；GPIO5/6 当前公开源码未发现冲突；PIR OUT 电平、端子夹线状态及模块版本仍待确认。 |
 
 ## 阶段进度
 
