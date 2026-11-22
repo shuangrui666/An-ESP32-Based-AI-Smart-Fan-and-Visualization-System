@@ -93,3 +93,38 @@ DEF-002（主循环中的 `delay(10)`）经审查认为位于 PIR 读取和 PWM 
 本轮返修报告显示，DEF-001 的错误失败判据已被移除，并改为检查 `ledcAttach()` / `ledcWrite()` 返回值；DEF-003 的 HTTP POST / GET 路径已补充连接超时与响应读取超时设置。三个 PlatformIO 构建环境据报告全部编译成功。
 
 **当前阶段结论：软件返修报告与编译验证已记录；源码差异核验、运行时行为验证和硬件验证仍未完成。不得将本轮结果表述为实体风扇控制已完成。**
+
+
+## 8. Git 证据复核更正（2026-11-22，后续只读核查）
+
+本节为后续核查形成的更正记录，保留前文原始返修摘要，不覆盖或删除此前记录。
+
+### 8.1 核查依据
+
+在本地项目工作区执行只读 Git 检查，当前 HEAD 为：
+
+`d0d9865ef9a94b9324acc442225bc5fb370a7eb8`
+
+以下命令均未找到 Git 跟踪记录：
+
+- `git ls-files --error-unmatch src/control/fan_controller.cpp`：退出码 1，文件未被 Git 跟踪。
+- `git ls-files --error-unmatch src/communication/wifi_manager.cpp`：退出码 1，文件未被 Git 跟踪。
+- `git ls-files --error-unmatch src/communication/wifi_manager.h`：退出码 1，文件未被 Git 跟踪。
+- 对上述三个文件执行 `git log --all --oneline -- <path>` 均无输出。
+- 对 `src/control/fan_controller.cpp` 和 `src/communication/wifi_manager.cpp` 执行 `git check-ignore -v` 均无输出；核查报告据此判断它们不是被忽略，而是尚未纳入跟踪。
+
+当前 `git status --short` 将 `src/control/` 和 `src/communication/` 显示为未跟踪目录（`??`）。
+
+### 8.2 更正后的证据结论
+
+1. DEF-001 与 DEF-003 的修复逻辑，是根据本地工作区源码进行核查；现有证据不能证明这些文件已进入 Git 历史。
+2. 本次核查没有找到 `fan_controller.cpp`、`wifi_manager.cpp`、`wifi_manager.h` 的 Git 提交记录。此前任何“修复已提交到 Git 历史”的表述均应视为不成立并以本节为准。
+3. 三个 PlatformIO 环境编译成功的结论来自用户提供的 Qwen 本地构建报告。构建日志位于本地 `.qwen/temp/` 目录；目前没有证据表明这些日志或对应源码已提交到 GitHub。
+4. 因而，编译结果只能表述为“本地工作区代码据报告构建通过”，不能表述为“GitHub 仓库中的对应源码已构建通过”。
+5. 本轮没有烧录、没有进行硬件上电、没有测量 PWM，也没有验证 MOSFET、风扇或整机行为。
+
+### 8.3 EXP-011 当前状态
+
+**更正状态：本地返修代码核查与本地三环境编译据报告通过；源码未纳入 Git 跟踪；修复提交历史不存在；运行时与硬件验证未完成。**
+
+后续应先单独审查并纳入必要源码文件，再通过明确的 Git 提交记录建立源码版本与构建日志之间的可追溯关系。不得为此将工作区中其他未经审查的文件批量提交。
