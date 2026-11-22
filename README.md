@@ -31,7 +31,7 @@ The project will document design decisions, implementation, experiments, limitat
 |---|---|---|
 | Environmental monitoring | DHT11 displays measured temperature and humidity through the system | Verified |
 | Motion detection | Detect movement with a compatible PIR sensor, if available | Pending hardware confirmation |
-| Fan control | Control OFF/LOW/MEDIUM/HIGH levels through a verified driver | Not implemented |
+| Fan control | Control OFF/LOW/MEDIUM/HIGH levels through a verified driver | Basic independent GPIO6/MOSFET ON/OFF bench test passed; formal firmware integration and variable-speed control pending |
 | AI recommendation | Current recommendation uses rule-based logic; no trained ML model yet | Rule-based prototype |
 | Wi-Fi communication | ESP32-S3 connects to Wi-Fi and uploads sensor data over HTTP | Verified |
 | Web dashboard | Displays real temperature, humidity, charts and device status | Verified |
@@ -200,6 +200,7 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 - ESP32-S3 successfully connected to Wi-Fi and uploaded sensor data to the computer over HTTP.
 - Flask backend successfully received actual sensor readings from the ESP32-S3.
 - Web dashboard displayed actual temperature, humidity, charts and device online status.
+- Independent ESP32-S3 GPIO6/MOSFET bench test: the 5 V USB fan started under the HIGH command and continued running with 100% PWM duty; see [EXP-012](experiment/records/2026-11-22/EXP-012-esp32s3-mosfet-fan-continuous-run-test.md). Intermediate-duty speed control, electrical measurements and formal firmware/web integration remain unverified.
 - A rule-based recommendation prototype was displayed in the web interface; this is not a trained machine-learning model.
 - Experiment log and record templates created.
 
@@ -211,7 +212,7 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 - Complete repository documentation and final evidence organization.
 
 ### Not yet implemented
-- Verified physical fan-driver wiring and actual fan speed control.
+- Formal firmware/web integration of fan control and verified variable-speed control; the independent 100% duty bench test is documented in EXP-012.
 - Reliable OFF/LOW/MEDIUM/HIGH control through the web dashboard.
 - Closed-loop or temperature-based automatic fan control using the physical fan.
 - A trained and evaluated machine-learning model.
