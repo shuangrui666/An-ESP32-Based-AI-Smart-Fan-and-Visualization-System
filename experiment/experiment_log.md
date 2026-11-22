@@ -15,6 +15,7 @@
 | EXP-007 | 2026-11-20 | PIR 原始信号读取测试程序编写 | completed（代码编写；未编译/未上板） | [EXP-007](records/2026-11-20/EXP-007-pir-raw-signal-read-test-code.md) | 新增独立 GPIO5 原始电平读取测试入口及 PlatformIO 环境；不控制风扇。PIR OUT 电压未确认，禁止上传运行；无硬件测试结论。 |
 | EXP-008 | 2026-11-20 | PIR 测试程序编译验证 | completed（编译验证；未上板） | [EXP-008](records/2026-11-20/EXP-008-pir-test-build-verification.md) | PIR 独立测试环境编译成功；因当时 PIR OUT 电平安全性未确认，记录明确未上传、未进行硬件测试。 |
 | EXP-009 | 2026-11-20 | PIR 硬件信号测试 | completed（GPIO 信号初步验证） | [EXP-009](records/2026-11-20/EXP-009-pir-hardware-signal-test.md) | 记录显示 GPIO5 读取到 8 次 HIGH/LOW 周期，静止观察约 38 秒持续 LOW；仅验证 PIR 信号读取，不涉及 MOSFET 或风扇控制。 |
+| EXP-012 | 2026-11-22 | ESP32-S3 GPIO6 / MOSFET 风扇连续运行验证 | completed（基本开关控制与连续运行现象已观察；电气测量及调速能力待验证） | [EXP-012](records/2026-11-22/EXP-012-esp32s3-mosfet-fan-continuous-run-test.md) | 用户确认 100% PWM 占空比下风扇能够持续运行；GPIO 波形、输出电压/电流、温升、中间占空比调速和正式固件集成仍待验证。独立测试源码与专用环境尚未纳入当前 GitHub 版本。 |
 | EXP-011 | 2026-11-22 | DEF-001 LEDC 初始化错误处理与 DEF-003 HTTP 超时返修 | 本地返修核查与三环境编译据报告通过；源码未纳入 Git，运行时/硬件待验证 | [DEF-001_REPAIR_REPORT](records/2026-11-22/DEF-001_REPAIR_REPORT.md) | 后续只读 Git 核查确认 fan_controller.cpp、wifi_manager.cpp/h 均未被 Git 跟踪，相关文件无提交历史；三环境编译结果来自本地工作区报告，日志仍在本地 .qwen/temp/，不能视为 GitHub 源码构建证据。未烧录、未测 PWM、未验证 MOSFET/风扇；更正详见独立报告第 8 节。 |
 | EXP-010 | 构建日期待确认；记录创建 2026-11-22 | ESP32-S3 主程序 LEDC API 兼容性修复与编译验证 | completed（编译验证；硬件待验证） | [EXP-010](records/2026-11-22/EXP-010-esp32s3-fan-controller-build-fix.md) | 据用户提供的 Qwen 报告，修复 LEDC API、PIR_SENSOR_PIN 定义及 5 处格式字符串问题；esp32-s3-devkitc-1 编译成功、无警告，RAM 14.4%、Flash 30.5%；未证明实际 PWM、MOSFET、风扇和 60 秒控制逻辑通过测试。 |
 
