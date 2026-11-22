@@ -106,3 +106,31 @@
 - 注意：本次是文档修订，不是硬件实验；没有测量风扇启动电流、确定电机类型、完成驱动接线或验证实体 PWM。
 - 协作改进：后续应优先复用用户此前提供的型号、参数、硬件清单和电路资料，不反复要求用户重复提供；将时间优先投入风扇实体控制。
 - 状态：completed（文档记录）；实体风扇控制问题仍 open。
+
+
+## 2.4 FIX-010：ESP32-S3 LEDC API 兼容性、PIR 引脚定义与格式字符串修复
+
+- 记录日期：2026-11-22
+- 实际构建日期：待确认（用户未提供本次编译的具体日期）
+- 关联实验：[EXP-010](records/2026-11-22/EXP-010-esp32s3-fan-controller-build-fix.md)
+- 模块：firmware / control / build
+- 开发环境：Windows + VS Code + PlatformIO；具体版本未提供
+- 目标环境：`esp32-s3-devkitc-1`
+- 问题来源：用户转述 VS Code 中 Qwen 的修复总结；本次记录未取得完整修复前后 diff。
+- 修复前问题：
+  1. `fan_controller.cpp` 使用旧版 LEDC API（`ledcSetup`、`ledcAttachPin`、按 channel 调用 `ledcWrite`），与当前 ESP32-S3 Arduino 核心 API 不兼容。
+  2. `main.cpp` 使用的 `PIR_SENSOR_PIN` 未定义。
+  3. 存在 5 处格式字符串与参数类型不匹配警告。
+- 据用户提供的修复摘要：
+  1. 使用 `ledcAttach(gpio, freq, resolution)` 替换旧版通道配置方式。
+  2. 使用 `ledcWrite(gpio, duty)` 按 GPIO 写入 PWM 占空比。
+  3. 在 `main.cpp` 中添加 `PIR_SENSOR_PIN` 定义。
+  4. 修复 5 处格式字符串与参数类型不匹配问题，涉及 `%d → %lu` 和 `%lu → %u`。
+- 验证结果（用户提供）：编译成功、无警告；RAM 47,040 / 327,680 bytes（14.4%）；Flash 1,020,840 / 3,342,336 bytes（30.5%）；生成 `.pio/build/esp32-s3-devkitc-1/firmware.bin`。
+- 当前结论：本次代码通过目标环境编译验证。由于尚未取得修复代码的 commit SHA、完整 diff、烧录日志和实际 PWM 测量，不能据此确认 PWM 输出、MOSFET 驱动或风扇动作正常。
+- 是否解决：编译层面 yes（按用户提供报告）；硬件层面 pending_verification。
+- 后续事项：
+  1. 补存完整构建终端日志和本次修复的 Git commit。
+  2. 只读核对 PWM GPIO、频率、分辨率、占空比、输出极性及 PIR 输入调用链。
+  3. 在电气安全条件满足后进行烧录、PWM、MOSFET 和风扇实测。
+  4. 单独验证最后一次 PIR 触发后 60 秒关闭及再次触发刷新计时的行为。
