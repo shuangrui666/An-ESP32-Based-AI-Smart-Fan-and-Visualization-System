@@ -134,3 +134,24 @@
   2. 只读核对 PWM GPIO、频率、分辨率、占空比、输出极性及 PIR 输入调用链。
   3. 在电气安全条件满足后进行烧录、PWM、MOSFET 和风扇实测。
   4. 单独验证最后一次 PIR 触发后 60 秒关闭及再次触发刷新计时的行为。
+
+## 2.5 DEF-001 / DEF-003：LEDC 失败处理与 HTTP 超时返修
+
+- 日期：2026-11-22
+- 关联实验：[EXP-011](records/2026-11-22/DEF-001_REPAIR_REPORT.md)
+- 模块：firmware / fan-control / communication
+- 信息来源：用户提供的 Qwen 返修摘要；尚未取得完整源码 diff 和本轮构建原始日志。
+- DEF-001 修复摘要：
+  1. 删除使用 `ledcRead()` 返回值小于零判断初始化失败的错误逻辑。
+  2. 据报告，`fan_controller.cpp` 现在检查 `ledcAttach()` 返回值；失败时清除初始化状态、记录错误并返回失败。
+  3. 据报告，PWM 写入检查 `ledcWrite()` 返回值；控制函数在未初始化时提前返回。
+  4. `main.cpp` 在 `fanController.begin()` 失败时输出错误日志。
+- DEF-003 修复摘要：
+  1. 据报告，`_sendHTTPPost()` 与 `_sendHTTPGet()` 均设置 `http.setConnectTimeout(HTTP_TIMEOUT)`。
+  2. 两条路径均增加 `http.setTimeout(HTTP_TIMEOUT)`，当前配置值据报告为 5 秒。
+  3. 该配置涉及连接与响应读取等待，不应表述为整个同步 HTTP 请求的绝对总耗时上限。
+- 编译验证：据用户提供报告，三个 PlatformIO 环境均编译成功；RAM 47,040 bytes（14.4%），Flash 1,021,176 bytes（30.6%）。
+- 验证边界：本轮没有烧录、没有硬件上电、没有测量 PWM、没有验证 MOSFET / 风扇动作；HTTP 超时行为也尚未通过断网或服务端无响应测试。源码 diff、commit SHA 和完整构建日志待补。
+- 当前状态：编译层面通过（据报告）；源码级与运行时验证 pending。
+- 后续事项：先核对本轮完整 diff 和构建日志，再完成 MOSFET 接线安全审查；满足电气安全条件后，分项验证 PWM、风扇控制和 HTTP 超时行为。
+
