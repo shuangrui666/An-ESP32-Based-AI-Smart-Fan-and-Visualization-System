@@ -155,3 +155,21 @@
 - 当前状态：编译层面通过（据报告）；源码级与运行时验证 pending。
 - 后续事项：先核对本轮完整 diff 和构建日志，再完成 MOSFET 接线安全审查；满足电气安全条件后，分项验证 PWM、风扇控制和 HTTP 超时行为。
 
+
+
+## 2.6 EXP-011 后续 Git 证据核查更正
+
+- 日期：2026-11-22
+- 关联实验：[EXP-011](records/2026-11-22/DEF-001_REPAIR_REPORT.md)
+- 核查性质：只读 Git 跟踪状态与提交历史核查
+- 核查时 HEAD：`d0d9865ef9a94b9324acc442225bc5fb370a7eb8`
+- 核查结果：
+  1. `src/control/fan_controller.cpp` 未被 Git 跟踪；`git log --all --oneline -- <path>` 无输出。
+  2. `src/communication/wifi_manager.cpp` 与 `src/communication/wifi_manager.h` 均未被 Git 跟踪；对应文件历史查询无输出。
+  3. `src/control/` 与 `src/communication/` 在 `git status --short` 中均显示为未跟踪目录。
+  4. 本次核查报告未发现上述文件被 `.gitignore` 忽略的证据。
+- 影响：DEF-001 / DEF-003 的修复逻辑当前只能归属于本地工作区源码，不能声称已经提交到 Git 历史或 GitHub。Qwen 报告中的三环境编译结果属于本地工作区构建结果；原始日志位于本地 `.qwen/temp/`，尚未归档到 GitHub。
+- 更正：EXP-011 的状态调整为“本地返修核查与三环境编译据报告通过；源码未纳入 Git，运行时/硬件待验证”。
+- 保留原则：此前返修摘要和本节更正均保留，以追加更正方式维护实验审计轨迹，不删除原始过程。
+- 后续动作：单独审查必要源码文件及其依赖，再决定精确纳入哪些文件；禁止为保存 EXP-011 而批量提交整个工作区。
+- 硬件边界：本轮没有烧录、上电测试、PWM 测量或 MOSFET / 风扇验证。
