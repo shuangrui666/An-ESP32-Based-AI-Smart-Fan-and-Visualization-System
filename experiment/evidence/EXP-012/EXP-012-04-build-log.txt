@@ -1,0 +1,34 @@
+Processing fan-simple-test (board: esp32-s3-devkitc-1; platform: espressif32; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-s3-devkitc-1.html
+PLATFORM: Espressif 32 (8.0.0) > Espressif ESP32-S3-DevKitC-1-N8 (8 MB QD, No PSRAM)
+HARDWARE: ESP32S3 240MHz, 320KB RAM, 8MB Flash
+DEBUG: Current (esp-builtin) On-board (esp-builtin) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES:
+ - framework-arduinoespressif32 @ 4.30312.261024 (3.3.12)
+ - framework-arduinoespressif32-esp32s3-libs @ 3.3.12
+ - tool-esptool @ 2.50400.0 (5.4.0)
+ - tool-riscv32-esp-elf-gdb @ 11.2.0+20220823
+ - tool-xtensa-esp-elf-gdb @ 11.2.0+20230208
+ - toolchain-riscv32-esp @ 14.2.0+20260121
+ - toolchain-xtensa-esp-elf @ 14.2.0+20230208
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 46 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- DHT sensor library @ 1.4.7
+|-- Adafruit Unified Sensor @ 1.1.15
+Building in release mode
+Retrieving maximum program size .pio\build\fan-simple-test\firmware.elf
+Checking size .pio\build\fan-simple-test\firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]   6.9% (used 22472 bytes from 327680 bytes)
+Flash: [=         ]   9.7% (used 324977 bytes from 3342336 bytes)
+========================= [SUCCESS] Took 1.76 seconds=========================
+
+Environment      Status    Duration
+---------------  --------  ------------
+fan-simple-test  SUCCESS   00:00:01.757
+========================= 1 succeeded in 1.757=========================
