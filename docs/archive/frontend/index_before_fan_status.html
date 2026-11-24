@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFan 2.0 - 智能风扇控制系统</title>
+    
+    <!-- ECharts 图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>🌡️ SmartFan 2.0 智能风扇控制系统</h1>
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span class="status-text" id="statusText">连接中...</span>
+            </div>
+        </header>
+
+        <!-- 主要仪表板 -->
+        <div class="dashboard">
+            <!-- 传感器数据卡片 -->
+            <div class="card sensor-cards">
+                <div class="card temperature-card">
+                    <div class="card-icon">🌡️</div>
+                    <div class="card-content">
+                        <h3>温度</h3>
+                        <div class="card-value" id="temperatureValue">--</div>
+                        <div class="card-unit">°C</div>
+                    </div>
+                </div>
+                
+                <div class="card humidity-card">
+                    <div class="card-icon">💧</div>
+                    <div class="card-content">
+                        <h3>湿度</h3>
+                        <div class="card-value" id="humidityValue">--</div>
+                        <div class="card-unit">%</div>
+                    </div>
+                </div>
+                
+                <div class="card gear-card">
+                    <div class="card-icon">🌀</div>
+                    <div class="card-content">
+                        <h3>当前档位</h3>
+                        <div class="card-value" id="gearValue">--</div>
+                        <div class="card-unit">档</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 推荐卡片 -->
+            <div class="card recommendation-card">
+                <h2>💡 AI 智能推荐</h2>
+                <div class="recommendation-content">
+                    <div class="recommendation-gear" id="recommendGear">--</div>
+                    <div class="recommendation-reason" id="recommendReason">等待数据...</div>
+                </div>
+                <div class="recommendation-method" id="recommendMethod"></div>
+            </div>
+
+            <!-- 手动控制 -->
+            <div class="card control-card">
+                <h2>🎮 手动控制</h2>
+                <div class="control-buttons">
+                    <button class="control-btn btn-off" onclick="setFanGear(0)">关闭</button>
+                    <button class="control-btn btn-1" onclick="setFanGear(1)">1 档</button>
+                    <button class="control-btn btn-2" onclick="setFanGear(2)">2 档</button>
+                    <button class="control-btn btn-3" onclick="setFanGear(3)">3 档</button>
+                </div>
+                <div class="control-status">
+                    <span>当前状态：</span>
+                    <span id="controlStatus">--</span>
+                </div>
+            </div>
+
+            <!-- 实时图表 -->
+            <div class="card chart-card">
+                <h2>📊 实时数据</h2>
+                <div id="tempChart" class="chart"></div>
+                <div id="humChart" class="chart"></div>
+            </div>
+
+            <!-- 系统信息 -->
+            <div class="card system-info-card">
+                <h2>📡 系统信息</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">WiFi 信号:</span>
+                        <span class="info-value" id="wifiSignal">--</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">最后通信:</span>
+                        <span class="info-value" id="lastSeen">--</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">数据点数:</span>
+                        <span class="info-value" id="dataPoints">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>SmartFan 2.0 - 基于 ESP32-S3 的智能风扇系统</p>
+            <p>版本 0.1.0 | 开发阶段：第一阶段 - 基础测试</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript 应用逻辑 -->
+    <script src="js/app.js"></script>
+</body>
+</html>
