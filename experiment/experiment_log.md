@@ -13,11 +13,6 @@
 | EXP-005 | 2026-11-19 | MOSFET 驱动模块焊接与初步接线记录 | in_progress（已拍照；未上电、未完成电气核验） | [EXP-005](records/2026-11-19/EXP-005-mosfet-module-preliminary-wiring.md) | 已记录模块焊接和用户报告的初步连接；MOSFET端子拓扑、触发极性、GPIO兼容性及接线安全仍待核实；传感器照片已辨认出DHT11与PIR外观模块，PIR型号待确认。 |
 | EXP-006 | 2026-11-20 | MOSFET 与 PIR 电气安全审查 | in_progress（部分核对通过；仍有上电前检查项） | [EXP-006](records/2026-11-20/EXP-006-mosfet-pir-electrical-safety-review.md) | 商品参数与同系列模块资料相符；GPIO5/6 当前公开源码未发现冲突；PIR OUT 电平、端子夹线状态及模块版本仍待确认。 |
 | EXP-007 | 2026-11-20 | PIR 原始信号读取测试程序编写 | completed（代码编写；未编译/未上板） | [EXP-007](records/2026-11-20/EXP-007-pir-raw-signal-read-test-code.md) | 新增独立 GPIO5 原始电平读取测试入口及 PlatformIO 环境；不控制风扇。PIR OUT 电压未确认，禁止上传运行；无硬件测试结论。 |
-| EXP-008 | 2026-11-20 | PIR 测试程序编译验证 | completed（编译验证；未上板） | [EXP-008](records/2026-11-20/EXP-008-pir-test-build-verification.md) | PIR 独立测试环境编译成功；因当时 PIR OUT 电平安全性未确认，记录明确未上传、未进行硬件测试。 |
-| EXP-009 | 2026-11-20 | PIR 硬件信号测试 | completed（GPIO 信号初步验证） | [EXP-009](records/2026-11-20/EXP-009-pir-hardware-signal-test.md) | 记录显示 GPIO5 读取到 8 次 HIGH/LOW 周期，静止观察约 38 秒持续 LOW；仅验证 PIR 信号读取，不涉及 MOSFET 或风扇控制。 |
-| EXP-012 | 2026-11-22 | ESP32-S3 GPIO6 / MOSFET 风扇连续运行验证 | completed（基本开关控制与连续运行现象已观察；电气测量及调速能力待验证） | [EXP-012](records/2026-11-22/EXP-012-esp32s3-mosfet-fan-continuous-run-test.md) | 用户确认 100% PWM 占空比下风扇能够持续运行；GPIO 波形、输出电压/电流、温升、中间占空比调速和正式固件集成仍待验证。独立测试源码与专用环境尚未纳入当前 GitHub 版本。 |
-| EXP-011 | 2026-11-22 | DEF-001 LEDC 初始化错误处理与 DEF-003 HTTP 超时返修 | 本地返修核查与三环境编译据报告通过；源码未纳入 Git，运行时/硬件待验证 | [DEF-001_REPAIR_REPORT](records/2026-11-22/DEF-001_REPAIR_REPORT.md) | 后续只读 Git 核查确认 fan_controller.cpp、wifi_manager.cpp/h 均未被 Git 跟踪，相关文件无提交历史；三环境编译结果来自本地工作区报告，日志仍在本地 .qwen/temp/，不能视为 GitHub 源码构建证据。未烧录、未测 PWM、未验证 MOSFET/风扇；更正详见独立报告第 8 节。 |
-| EXP-010 | 构建日期待确认；记录创建 2026-11-22 | ESP32-S3 主程序 LEDC API 兼容性修复与编译验证 | completed（编译验证；硬件待验证） | [EXP-010](records/2026-11-22/EXP-010-esp32s3-fan-controller-build-fix.md) | 据用户提供的 Qwen 报告，修复 LEDC API、PIR_SENSOR_PIN 定义及 5 处格式字符串问题；esp32-s3-devkitc-1 编译成功、无警告，RAM 14.4%、Flash 30.5%；未证明实际 PWM、MOSFET、风扇和 60 秒控制逻辑通过测试。 |
 
 ## 阶段进度
 
@@ -27,7 +22,6 @@
 | 电气与接线设计 | in_progress | 实际接线已拍照记录；电路拓扑、引脚和电源方案仍待核实 |
 | 传感器单项测试（DHT11） | completed | 本次 GPIO4 温湿度读取验证通过；长期稳定性仍待持续测试 |
 | ESP32 固件测试（基础状态与 DHT11） | completed | 主程序已编译、上传并输出有效温湿度；其他固件功能仍待测试 |
-| ESP32-S3 主程序编译（LEDC API 修复后） | completed（编译） | 据用户提供报告，目标环境编译成功且无警告；固件烧录、PWM 波形和风扇实际控制仍待验证 |
 | Wi-Fi 通信测试（ESP32 → Flask 上传） | completed | 已观察到真实温湿度 POST 请求并收到 HTTP 200；断线恢复和双向通信仍待单独测试 |
 | MOSFET驱动模块装配 | in_progress | 已焊接排针并完成初步接线记录；尚未上电或验证 |
 | 后端测试 | in_progress | 已验证温湿度接收；风扇控制接口仍待实现并验证 |

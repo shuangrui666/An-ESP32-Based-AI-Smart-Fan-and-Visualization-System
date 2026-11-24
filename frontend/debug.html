@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFan 2.0 - 诊断页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .info {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .success { color: #28a745; }
+        .warning { color: #ffc107; }
+        .error { color: #dc3545; }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #testResults {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            display: none;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 SmartFan 2.0 前端诊断工具</h1>
+
+        <div class="section">
+            <h2>1. 环境信息</h2>
+            <div class="info">
+                <div><strong>当前 URL:</strong> <span id="currentUrl"></span></div>
+                <div><strong>页面路径:</strong> <span id="basePath"></span></div>
+                <div><strong>文档来源:</strong> <span id="docSource"></span></div>
+                <div><strong>浏览器 User-Agent:</strong> <span id="userAgent"></span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. JavaScript 加载检查</h2>
+            <div class="info">
+                <div id="jsLoadStatus">检查中...</div>
+                <div id="appJsInfo"></div>
+                <div id="functionsInfo"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. 后端连接检查</h2>
+            <div class="info">
+                <div id="backendUrlInfo"></div>
+                <button onclick="testBackendConnection()">测试后端连接</button>
+                <div id="backendTestResult"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. 按钮事件检查</h2>
+            <div class="info">
+                <p>点击下方按钮测试事件绑定：</p>
+                <button onclick="testSetControlMode('auto')">测试 AUTO 模式</button>
+                <button onclick="testSetControlMode('manual')">测试 MANUAL 模式</button>
+                <button onclick="testSetManualGear(1)">测试 1 档</button>
+                <button onclick="testSetManualGear(2)">测试 2 档</button>
+                <div id="buttonTestResult"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. 缓存检查</h2>
+            <div class="info">
+                <p>如果怀疑浏览器缓存问题，请执行以下操作：</p>
+                <ol>
+                    <li>按 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Delete</kbd> 打开清除缓存对话框</li>
+                    <li>选择"缓存的图片和文件"</li>
+                    <li>点击"清除数据"</li>
+                    <li>或者按 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> 强制刷新</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="testResults">
+            <h2>测试结果</h2>
+            <pre id="resultsText"></pre>
+        </div>
+    </div>
+
+    <script>
+        // 显示诊断信息
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('basePath').textContent = window.location.pathname;
+        document.getElementById('docSource').textContent = document.documentURI;
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+
+        // 检查 JavaScript 加载
+        const jsLoadStatus = document.getElementById('jsLoadStatus');
+        const appJsInfo = document.getElementById('appJsInfo');
+        const functionsInfo = document.getElementById('functionsInfo');
+
+        // 等待一小段时间让 app.js 加载
+        setTimeout(() => {
+            const results = [];
+            
+            // 检查 BACKEND_URL
+            if (typeof BACKEND_URL !== 'undefined') {
+                appJsInfo.innerHTML = `<span class="success">✓ app.js 已加载</span>`;
+                appJsInfo.innerHTML += `<div>BACKEND_URL = '${BACKEND_URL}'</div>`;
+            } else {
+                appJsInfo.innerHTML = `<span class="error">✗ app.js 未加载或未定义 BACKEND_URL</span>`;
+            }
+
+            // 检查函数是否存在
+            let functionsChecked = 0;
+            if (typeof setControlMode === 'function') {
+                functionsInfo.innerHTML += `<div>✓ setControlMode() 函数存在</div>`;
+                functionsChecked++;
+            } else {
+                functionsInfo.innerHTML += `<div class="error">✗ setControlMode() 函数不存在</div>`;
+            }
+
+            if (typeof setManualGear === 'function') {
+                functionsInfo.innerHTML += `<div>✓ setManualGear() 函数存在</div>`;
+                functionsChecked++;
+            } else {
+                functionsInfo.innerHTML += `<div class="error">✗ setManualGear() 函数不存在</div>`;
+            }
+
+            if (typeof currentControlMode !== 'undefined') {
+                functionsInfo.innerHTML += `<div>✓ currentControlMode = '${currentControlMode}'</div>`;
+            } else {
+                functionsInfo.innerHTML += `<div class="error">✗ currentControlMode 未定义</div>`;
+            }
+
+            jsLoadStatus.innerHTML = `<span class="${functionsChecked >= 2 ? 'success' : 'error'}">JavaScript 加载状态：${functionsChecked}/2 函数已加载</span>`;
+        }, 1000);
+
+        // 测试后端连接
+        async function testBackendConnection() {
+            const resultDiv = document.getElementById('backendTestResult');
+            resultDiv.innerHTML = '测试中...';
+
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    resultDiv.innerHTML = `
+                        <div class="success">✓ 后端连接成功</div>
+                        <div>状态码：${response.status}</div>
+                        <div>响应数据：${JSON.stringify(data, null, 2)}</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="error">✗ 后端响应异常</div>
+                        <div>状态码：${response.status}</div>
+                        <div>响应数据：${JSON.stringify(data, null, 2)}</div>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">✗ 后端连接失败</div>
+                    <div>错误：${error.message}</div>
+                `;
+            }
+        }
+
+        // 测试按钮事件
+        async function testSetControlMode(mode) {
+            const resultDiv = document.getElementById('buttonTestResult');
+            resultDiv.innerHTML = `测试 ${mode} 模式...`;
+
+            try {
+                console.log(`[测试] 调用 setControlMode('${mode}')`);
+                
+                if (typeof setControlMode !== 'function') {
+                    throw new Error('setControlMode 函数不存在');
+                }
+
+                await setControlMode(mode);
+                resultDiv.innerHTML = `<span class="success">✓ setControlMode('${mode}') 调用成功</span>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ setControlMode('${mode}') 失败：${error.message}</span>`;
+            }
+        }
+
+        async function testSetManualGear(gear) {
+            const resultDiv = document.getElementById('buttonTestResult');
+            resultDiv.innerHTML = `测试 ${gear}档...`;
+
+            try {
+                console.log(`[测试] 调用 setManualGear(${gear})`);
+                
+                if (typeof setManualGear !== 'function') {
+                    throw new Error('setManualGear 函数不存在');
+                }
+
+                await setManualGear(gear);
+                resultDiv.innerHTML = `<span class="success">✓ setManualGear(${gear}) 调用成功</span>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">✗ setManualGear(${gear}) 失败：${error.message}</span>`;
+            }
+        }
+
+        // 显示测试结果
+        function showResults(results) {
+            const testResults = document.getElementById('testResults');
+            const resultsText = document.getElementById('resultsText');
+            
+            testResults.style.display = 'block';
+            resultsText.textContent = JSON.stringify(results, null, 2);
+        }
+    </script>
+</body>
+</html>

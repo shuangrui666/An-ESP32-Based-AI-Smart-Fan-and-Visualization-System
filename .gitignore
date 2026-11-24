@@ -1,0 +1,67 @@
+# PlatformIO
+.platfo*
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Build
+build/
+*.o
+*.elf
+*.bin
+*.map
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Data (raw data should be tracked, processed may be large)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Environment
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+requirements-lock.txt
+
+# Node.js (if frontend uses npm)
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Temporary
+tmp/
+temp/
+*.tmp
+src/communication/secrets.h
+
+# Environment files
+.env*
+**/.env*
+!.env.example
+!**/.env.example
+
+# Local secrets
+src/communication/secrets.h

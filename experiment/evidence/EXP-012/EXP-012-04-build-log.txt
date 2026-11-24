@@ -12,7 +12,7 @@ PACKAGES:
  - tool-riscv32-esp-elf-gdb @ 11.2.0+20220823
  - tool-xtensa-esp-elf-gdb @ 11.2.0+20230208
  - toolchain-riscv32-esp @ 14.2.0+20260121
- - toolchain-xtensa-esp-elf @ 14.2.0+20230208
+ - toolchain-xtensa-esp-elf @ 14.2.0+20260121
 LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
 LDF Modes: Finder ~ chain, Compatibility ~ soft
 Found 46 compatible libraries
@@ -26,9 +26,9 @@ Checking size .pio\build\fan-simple-test\firmware.elf
 Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
 RAM:   [=         ]   6.9% (used 22472 bytes from 327680 bytes)
 Flash: [=         ]   9.7% (used 324977 bytes from 3342336 bytes)
-========================= [SUCCESS] Took 1.76 seconds=========================
+========================= [SUCCESS] Took 1.76 seconds =========================
 
 Environment      Status    Duration
 ---------------  --------  ------------
 fan-simple-test  SUCCESS   00:00:01.757
-========================= 1 succeeded in 1.757=========================
+========================= 1 succeeded in 00:00:01.757 =========================

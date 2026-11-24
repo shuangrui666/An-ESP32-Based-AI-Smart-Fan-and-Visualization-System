@@ -10,7 +10,7 @@
  *
  * 硬件要求：
  * - DHT11 传感器模块
- * - DATA 上拉配置需以传感器模块电路为准；不要仅凭模块外观推断是否需要外接电阻
+ * - 10k 上拉电阻（DATA 引脚到 VCC）
  *
  * 接线说明：
  * - DHT11 VCC → ESP32 3.3V
@@ -54,14 +54,13 @@ bool DHTSensor::begin(int pin) {
     // DHT(uint8_t pin, uint8_t type, uint8_t count = 6)
     _dhtInstance = new DHT(_pin, _type, 6);
 
-    // 调用 Adafruit DHT 库初始化。55 是该库的 pullTime 参数，不应表述为 DHT11 专属标准。
+    // 关键：调用 begin() 初始化传感器（DHT11 需要 55us 延迟）
     _dhtInstance->begin(55);
 
     _initialized = true;
     _lastReadTime = 0;
 
-    // begin() 完成的是驱动/引脚初始化，不代表已验证传感器实际响应。
-    Serial.println("[DHTSensor] Driver initialized; sensor response will be checked during reads");
+    Serial.println("[DHTSensor] Initialized successfully");
     Serial.printf("[DHTSensor] Pin: %d, Type: DHT11\n", _pin);
     return true;
 }

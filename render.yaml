@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: smartfan-2
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn -w 2 -b 0.0.0.0:$PORT app:app
+    plan: free
+    region: oregon
+    branch: main
