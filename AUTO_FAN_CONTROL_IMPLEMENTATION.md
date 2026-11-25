@@ -1,3 +1,5 @@
+> **Verification boundary (2026-11-25):** “Implementation complete” in this report refers to the firmware control logic being written and compile-reported. The scenarios below are test procedures/expected logs, not proof that the combined PIR + temperature + MOSFET + physical fan behavior passed. The standalone fan test (EXP-012) verifies only basic switching and 100% continuous operation; full automatic-control hardware integration remains pending.
+
 # SmartFan 2.0 自动风扇控制功能实现报告
 
 ## 项目信息
