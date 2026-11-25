@@ -1,3 +1,5 @@
+> **Verification boundary (2026-11-25):** This report documents software changes and the reported five-environment build success. Its “修复完成” status does not mean the web-to-ESP32-to-physical-fan end-to-end test has passed. Actual webpage command execution, fan response, ACK and UI-state consistency still require a single recorded hardware integration test.
+
 # 手动控制风扇指令收发问题修复报告
 
 **修复时间**: 2026-11-24  
