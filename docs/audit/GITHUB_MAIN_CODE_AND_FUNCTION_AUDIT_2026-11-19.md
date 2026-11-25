@@ -1,3 +1,5 @@
+> **Historical audit notice (2026-11-25):** This report is a point-in-time audit of main at commit 79b3db7 (2026-11-19), before the subsequent project consolidation. Its statements that backend/frontend/control source files were absent from main are no longer current. Later commits added the complete project source tree, reports and evidence. Retain this report as a record of the earlier repository state; use the current root README and experiment index for present status.
+
 # GitHub main 代码与功能核查报告
 
 - 核查日期：2026-11-19
