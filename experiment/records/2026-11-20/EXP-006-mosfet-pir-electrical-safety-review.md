@@ -63,3 +63,11 @@ The photographed PIR board resembles an HC-SR501-style module, but its exact mod
 ## 7. Decision
 
 **Partial pass only.** The recorded MOSFET wiring arrangement and 3.3 V control plan are consistent with matching module family documentation. The firmware source audit found no current GPIO5/GPIO6 conflict. Physical terminal clamping, exact module revision, and PIR OUT voltage remain unverified. EXP-006 does not authorize powering the fan-driver circuit yet.
+
+
+## 后续测试状态补充（2026-11-25）
+
+本记录的“尚未上电 / 尚未进行 PIR 实测”描述的是 EXP-006 审查当时的安全状态。后续实验已分别记录：PIR GPIO5 初步信号读取见 [EXP-009](EXP-009-pir-hardware-signal-test.md)；GPIO6/MOSFET 驱动 USB 风扇基本启停及 100% 连续运行见 [EXP-012](../2026-11-22/EXP-012-esp32s3-mosfet-fan-continuous-run-test.md)。
+
+这些后续实验更新了“是否曾经测试”的状态，但没有消除本审查提出的全部电气核验事项：风扇启动电流、模块温升、准确板卡修订、端子夹持及中间 PWM 档位仍未测量。请结合 EXP-009 和 EXP-012 阅读，不要单独把本记录的历史安全门槛当作最终测试状态。
+
