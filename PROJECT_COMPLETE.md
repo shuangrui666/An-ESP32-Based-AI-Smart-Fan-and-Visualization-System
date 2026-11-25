@@ -1,3 +1,5 @@
+> **Historical snapshot notice (2026-11-25):** This report was written on 2026-11-14. Its fan-control, PIR, backend and frontend status describes the project at that date and is not the current project status. Later evidence includes EXP-009 (PIR signal test), EXP-012 (independent MOSFET/fan basic operation), Phase 3.2.1 (backend command queue) and Phase 3.2.2 (remote-control software implementation/build). Consult the root README and experiment index for the current evidence-based status. The original historical report below is retained unchanged.
+
 # SmartFan 2.0 项目阶段性进度报告
 
 **项目名称：** ESP32-S3 智能风扇与可视化系统  
