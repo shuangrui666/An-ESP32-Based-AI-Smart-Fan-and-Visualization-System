@@ -104,7 +104,7 @@ The ESP32 should retain a simple local fallback strategy for loss of backend or 
 |---|---|---|
 | ESP32-S3 development board | Sensor acquisition and device control | Identified from board marking as YD-ESP32-S3 Classic V1.0; pin mapping still to be checked |
 | ESP32-S3 module | Main controller module on the board | Marking readable as ESP32-S3-WROOM-1; full suffix/variant pending verification |
-| Temperature / humidity sensor | Environmental measurements | User-confirmed DHT11, three-pin module marked GND / DATA / VCC; electrical details and live readings not yet tested |
+| Temperature / humidity sensor | Environmental measurements | DHT11; GPIO4 acquisition tested in EXP-001; accuracy and long-term stability pending |
 | PIR sensor | Detect movement events | Availability and model pending kit inventory |
 | USB-powered fan | Airflow output | Purchased; seller-confirmed rated values 5 V / 1 A; startup current and external control capability not verified |
 | Motor driver or switching circuit | Interface between ESP32 and fan power circuit | Not selected; requires fan and driver compatibility checks |
