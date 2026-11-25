@@ -1,3 +1,5 @@
+> **Historical snapshot notice (2026-11-25):** This report records the deployment preparation and test state as of 2026-11-19. Its statements that fan hardware was not connected, ESP32 upload was still pending, and control endpoints were only placeholders are historical and have been superseded by later records. For current status, see the root README, experiment/experiment_log.md, EXP-012, Phase 3.2.1 and Phase 3.2.2 reports. The Render deployment status in this historical report is not a claim that a live service is currently deployed.
+
 # SmartFan 2.0 部署报告
 
 **生成时间**: 2026-11-19  
