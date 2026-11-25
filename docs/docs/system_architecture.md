@@ -1,3 +1,5 @@
+> **Historical design snapshot:** This duplicate-path architecture document is retained for traceability and describes an earlier planning state. Its “pending” statuses are historical, not the current project status. Consult [the current architecture document](../system_architecture.md), the root README and experiment index for later implementation and test evidence.
+
 # SmartFan 2.0 — System Architecture
 
 **Project:** An ESP32-Based AI Smart Fan and Visualization System  
