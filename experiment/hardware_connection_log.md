@@ -4,10 +4,10 @@
 
 ## 1. 当前连接状态
 
-- 状态：in_progress（已拍照记录初步装配；尚未上电、尚未完成电气核验）
+- 当前状态：in_progress（已完成 PIR 信号读取及独立风扇基本驱动测试；电流、温升、保护和调速能力等电气核验仍未完成）
 - ESP32 开发板：照片可见 VO-ESP32-S3 标识；完整板卡型号和引脚映射仍需结合本地工程与板卡资料核对
 - 温湿度传感器：DHT11；GPIO4 已在 EXP-001 验证
-- 人体活动传感器：白色菲涅尔透镜外观的 PIR 模块；准确型号、供电电压、OUT 电平待确认
+- 人体活动传感器：HC-SR501（EXP-009 记录的用户确认型号）；GPIO5 信号读取已初步验证，OUT 电压及检测参数仍待核实
 - 风扇：USB 风扇；说明书记录 5 V / 2.5 W，启动电流仍待核实
 - 驱动 / 开关模块：蓝色双 MOSFET PWM 电子开关模块；可见端子标识 TRIG/PWM、GND、VIN−、VIN+、VOUT−、VOUT+
 - 接线照片与阶段记录：[EXP-005](records/2026-11-19/EXP-005-mosfet-module-preliminary-wiring.md)
@@ -17,8 +17,8 @@
 | 模块 | 模块引脚 | ESP32 引脚 | 信号类型 / 总线 | 电压兼容性 | 分配依据 | 状态 |
 |---|---|---|---|---|---|---|
 | DHT11 | DATA | GPIO4 | 数字单总线 | 已在当前配置下完成读取验证 | EXP-001 与固件 DHT 驱动 | verified for DHT11 read |
-| PIR 外观模块 | OUT（待确认） | GPIO5（候选） | 数字输入 | 模块 OUT 电压未核实 | 当前接线方案候选；尚未核对型号与本地 GPIO 占用 | pending_verification |
-| MOSFET 驱动模块 | TRIG/PWM | GPIO6（候选） | 数字/PWM 输出 | 触发极性及 3.3 V 兼容性未核实 | 用户报告的当前连接；尚未审计本地 GPIO 占用 | pending_verification |
+| HC-SR501 PIR | OUT | GPIO5 | 数字输入 | 已观察 HIGH/LOW；电压幅值未测 | EXP-009 烧录与串口信号记录 | signal read verified; voltage/calibration pending |
+| MOSFET 驱动模块 | TRIG/PWM | GPIO6 | 数字/PWM 输出 | 独立测试已观察基本开关及 100% 连续运行；中间 PWM 未验证 | EXP-012 独立 fan-simple-test | basic switching/full-duty verified; electrical characterization and variable speed pending |
 | MOSFET 驱动模块 | GND | ESP32 GND | 信号参考地 | 依据驱动电路拓扑最终确认 | 用户报告已连接 | pending_verification |
 
 ## 3. 电源与负载核对
