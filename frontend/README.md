@@ -51,21 +51,21 @@ frontend/
 └── README.md
 ```
 
-## 5. 运行环境
+## 6. 运行环境
 
 - Windows
 - Python 3
 - Flask 后端
 - 支持 JavaScript 的现代浏览器
 
-## 6. 启动方法
+## 7. 启动方法
 
 ### 6.1 启动后端
 
 先在一个终端中启动 Flask：
 
 ```powershell
-Set-Location "E:\PlatformIOProjects\SmartFan2\backend"
+Set-Location "<仓库根目录>\backend"
 pip install -r requirements.txt
 python app.py
 ```
@@ -79,7 +79,7 @@ python app.py
 另开一个终端：
 
 ```powershell
-Set-Location "E:\PlatformIOProjects\SmartFan2"
+Set-Location "<仓库根目录>"
 python -m http.server 8080 --directory frontend
 ```
 
@@ -89,7 +89,7 @@ python -m http.server 8080 --directory frontend
 
 注意：前端请求的后端地址应与当前实际运行的 Flask 服务地址一致。ESP32-S3 与电脑之间也需要处于能够互相通信的网络环境。
 
-## 7. 技术说明
+## 8. 技术说明
 
 | 技术 | 用途 |
 |---|---|
@@ -99,7 +99,7 @@ python -m http.server 8080 --directory frontend
 | ECharts | 温湿度数据可视化 |
 | Flask API | 获取后端传感器数据 |
 
-## 8. 后续验证计划
+## 9. 后续验证计划
 
 1. 完成网页 → Flask → ESP32 → MOSFET → 实体风扇的端到端联调。
 2. 验证 0–5 档位命令与实体风扇响应是否一致。
