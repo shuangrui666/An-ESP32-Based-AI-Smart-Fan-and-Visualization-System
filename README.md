@@ -188,23 +188,23 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 
 ## 11. Current Project Status
 
-The status below reflects the latest repository evidence available on 2026-11-25. “Implemented”, “compiled”, “tested independently” and “integrated on hardware” are deliberately treated as different verification levels.
+The status below reflects repository evidence available on 2026-11-25. “Implemented”, “compiled”, “tested independently” and “integrated on hardware” are different verification levels.
 
 ### Completed or verified at the stated scope
 
-- Project proposal, development schedule, architecture notes, experiment records and evidence index are present in the repository.
+- Project proposal, development schedule, architecture notes, experiment records and evidence index are present.
 - ESP32-S3 firmware development environment and PlatformIO project are established.
-- DHT11 temperature/humidity acquisition on GPIO4 passed the independent 22/22-read test and was also observed in the main firmware serial output (EXP-001).
+- DHT11 temperature/humidity acquisition on GPIO4 passed the independent 22/22-read test and was also observed in main-firmware serial output (EXP-001).
 - ESP32-S3 Wi-Fi connection and one-way HTTP sensor upload to Flask returned HTTP 200 in the historical retest (EXP-004). This does not prove permanent connectivity or command delivery.
 - PIR signal acquisition on GPIO5 was uploaded and observed to produce HIGH/LOW transitions; eight cycles and a stationary LOW interval were recorded (EXP-009). Detection range, angle, false-trigger rate and long-term stability were not calibrated.
-- An independent GPIO6/MOSFET test demonstrated basic fan switching and continuous operation at 100% PWM duty (EXP-012). This is not a variable-speed test and is not the production firmware/web integration test.
-- Flask fan-command queue and its state-management APIs are implemented; the recorded automated test result is 22 passed, 0 failed (Phase 3.2.1).
-- ESP32 remote-command polling/ACK, AUTO/MANUAL arbitration and frontend command-status UI are present in the software deliverables; the five PlatformIO environments were reported as compiling successfully (Phase 3.2.2 / manual-control repair report).
+- An independent GPIO6/MOSFET test demonstrated basic fan switching and continuous operation at 100% PWM duty (EXP-012). This is not a variable-speed test or production firmware/web integration test.
+- Flask fan-command queue and state-management APIs are implemented; the recorded automated test result is 22 passed, 0 failed (Phase 3.2.1).
+- ESP32 remote-command polling/ACK, AUTO/MANUAL arbitration and frontend command-status UI are present in software deliverables; five PlatformIO environments were reported as compiling successfully (Phase 3.2.2 / manual-control repair report).
 - Frontend sensor display, charts, control-mode/gear UI and command-status polling code are present.
 
 ### Implemented in software; physical integration still pending
 
-- Main-firmware temperature/PIR automatic-control logic (28 °C start threshold, 26 °C stop threshold and 60-second idle timeout) is implemented and compile-reported; the combined physical fan-control behavior has not been demonstrated by an end-to-end test.
+- Main-firmware temperature/PIR automatic-control logic (28 °C start threshold, 26 °C stop threshold and 60-second idle timeout) is implemented and compile-reported; combined physical fan-control behavior has not been demonstrated by an end-to-end test.
 - Remote command creation, ESP32 polling, execution handling and ACK reporting are implemented in software; actual webpage-to-ESP32-to-MOSFET-to-fan operation remains pending hardware verification.
 - FanController supports software gear/PWM levels, but only OFF and full-duty operation are evidenced by the independent hardware test. Intermediate levels and actual speed differences remain unverified.
 
