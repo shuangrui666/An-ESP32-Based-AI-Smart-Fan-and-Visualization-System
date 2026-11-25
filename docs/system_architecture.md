@@ -1,3 +1,5 @@
+> **Implementation status addendum (2026-11-25):** This document remains a preliminary architecture/design reference. Since its original drafting, DHT11 GPIO4 acquisition (EXP-001), PIR GPIO5 signal testing (EXP-009), ESP32-to-Flask sensor upload (EXP-004), independent GPIO6/MOSFET fan basic operation at full duty (EXP-012), Flask command queue (Phase 3.2.1) and remote-command software implementation/build (Phase 3.2.2) have been recorded. The design sections below describe intended architecture and must not be read as a statement that every planned module or end-to-end behavior is complete. See the root README and experiment index for current status.
+
 # SmartFan 2.0 — System Architecture
 
 **Project:** An ESP32-Based AI Smart Fan and Visualization System  
@@ -108,7 +110,7 @@ The ESP32 should retain a simple local fallback strategy for loss of backend or 
 | Motor driver or switching circuit | Interface between ESP32 and fan power circuit | Not selected; requires fan and driver compatibility checks |
 | Power source and wiring | Supply power and connect modules | Must be confirmed after inspection and electrical verification |
 
-The DHT11 module has been identified by user confirmation; its live operation has not yet been tested. Do not assume that a PIR sensor or motor driver is included until it has been physically identified.
+DHT11 operation on GPIO4 was verified in EXP-001. PIR signal acquisition on GPIO5 was tested in EXP-009. The current repository also records an independent MOSFET/fan basic-operation test in EXP-012. These component tests do not establish complete integrated system behavior.
 
 ### 3.2 Hardware Block Diagram
 
