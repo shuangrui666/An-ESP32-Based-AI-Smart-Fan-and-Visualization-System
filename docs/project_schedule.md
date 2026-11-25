@@ -75,8 +75,8 @@ Status definitions:
 ### Stage 7 — Visualization Dashboard
 - [x] Create responsive page layout.
 - [x] Display current sensor readings and connection state.
-- [ ] Display mode and commanded fan level.
-- [ ] Add temperature/humidity time-series charts where sensor data exists.
+- [x] Display mode and commanded fan level in the control UI.
+- [x] Add temperature/humidity time-series charts where sensor data exists.
 - [ ] Add motion-event and fan-command timelines where applicable.
 - [ ] Display AI recommendation and its timestamp/source.
 - [x] Implement manual/automatic controls and command-status polling in software; physical command-to-fan response remains to be verified.
