@@ -1,8 +1,8 @@
 ﻿# SmartFan 2.0
 **An ESP32-Based AI Smart Fan and Visualization System**
 
-> **Project stage:** ESP32-S3 sensor acquisition, Wi-Fi communication, Flask data reception and web visualization verified; physical fan control in development.
-> **Implementation status:** Completed functions are evidence-based. Physical fan control and trained machine-learning functions are not yet implemented.
+> **Project stage (2026-11-25):** DHT11 and PIR signal acquisition have been tested; ESP32-to-Flask sensor upload and the web dashboard have historical verification; backend command queue and ESP32 remote-command software are implemented and compile-checked; an independent GPIO6/MOSFET test demonstrated basic fan switching and continuous full-duty operation.
+> **Verification boundary:** Intermediate PWM speed control, physical web-to-fan command execution, integrated PIR/temperature automatic fan control, electrical measurements, and a trained machine-learning model are not yet verified. See the experiment index for evidence and limits.
 
 ## 1. Project Overview
 
@@ -16,7 +16,7 @@ The project will document design decisions, implementation, experiments, limitat
 
 1. Build an ESP32-based control prototype.
 2. Measure environmental temperature and, if supported by the available sensor, humidity.
-3. Detect movement using a PIR sensor if one is available in the kit or can be borrowed.
+3. Detect movement with the installed PIR module and validate its signal and integration.
 4. Implement safe fan control after verifying the fan's electrical characteristics and selecting a compatible driver.
 5. Develop a Python machine-learning model to recommend fan operating levels.
 6. Exchange sensor data and control commands over Wi-Fi.
@@ -30,11 +30,11 @@ The project will document design decisions, implementation, experiments, limitat
 | Feature | Planned behavior | Status |
 |---|---|---|
 | Environmental monitoring | DHT11 displays measured temperature and humidity through the system | Verified |
-| Motion detection | Detect movement with a compatible PIR sensor, if available | Pending hardware confirmation |
-| Fan control | Control OFF/LOW/MEDIUM/HIGH levels through a verified driver | Not implemented |
+| Motion detection | Read PIR signal on GPIO5 | Initial HIGH/LOW signal test observed (EXP-009); calibration and full-system integration pending |
+| Fan control | Control the USB fan through the MOSFET driver | Standalone OFF/ON and 100% continuous-run behavior observed (EXP-012); intermediate PWM levels and integrated remote control not verified |
 | AI recommendation | Current recommendation uses rule-based logic; no trained ML model yet | Rule-based prototype |
 | Wi-Fi communication | ESP32-S3 connects to Wi-Fi and uploads sensor data over HTTP | Verified |
-| Web dashboard | Displays real temperature, humidity, charts and device status | Verified |
+| Web dashboard | Displays sensor data and provides AUTO/MANUAL, gear and command-status UI | Sensor dashboard verified; software control UI/API implemented; physical fan response from web commands not yet verified |
 | Historical charts | Display sensor data in the web interface | Basic visualization implemented |
 | AI visualization | Show model structure and evaluation after model training | Not implemented |
 | Offline fallback | ESP32 uses a documented local rule when the computer/network is unavailable | Planned |
@@ -188,36 +188,35 @@ See [experiment/README.md](experiment/README.md) for the full rules and [evidenc
 
 ## 11. Current Project Status
 
-### Completed
-- Initial project concept, technical direction, project proposal and development schedule documented.
-- GitHub repository established with project documentation and experiment records.
-- Preliminary system architecture documented; hardware-specific details remain subject to physical verification.
-- USB fan received. The manual specifies 5 V and 2.5 W; motor type, startup current and external speed-control compatibility remain unverified.
-- YD-ESP32-S3 Classic V1.0 development board used for firmware development.
-- ESP32-S3 development environment established with VS Code and PlatformIO.
-- Firmware build verified in the current GitHub clone using the `esp32-s3-devkitc-1` environment.
-- DHT11 sensor read verified on GPIO4: independent test reported 22/22 successful reads; the main firmware subsequently reported temperature and humidity readings in serial output. See [EXP-001](experiment/records/2026-11-11/EXP-001-esp32-dht11-validation.md).
-- ESP32-S3 successfully connected to Wi-Fi and uploaded sensor data to the computer over HTTP.
-- Flask backend successfully received actual sensor readings from the ESP32-S3.
-- Web dashboard displayed actual temperature, humidity, charts and device online status.
-- A rule-based recommendation prototype was displayed in the web interface; this is not a trained machine-learning model.
-- Experiment log and record templates created.
+The status below reflects the latest repository evidence available on 2026-11-25. “Implemented”, “compiled”, “tested independently” and “integrated on hardware” are deliberately treated as different verification levels.
 
-### In progress
-- Verify the fan's internal electrical structure, motor type, startup current and compatibility with external speed control.
-- Select and verify a suitable fan driver and safe power/control circuit.
-- Implement and test physical fan ON/OFF and three-level speed control.
-- Improve hardware inspection records, circuit diagrams and course project evidence.
-- Complete repository documentation and final evidence organization.
+### Completed or verified at the stated scope
 
-### Not yet implemented
-- Verified physical fan-driver wiring and actual fan speed control.
-- Reliable OFF/LOW/MEDIUM/HIGH control through the web dashboard.
-- Closed-loop or temperature-based automatic fan control using the physical fan.
-- A trained and evaluated machine-learning model.
-- Model structure and evaluation visualization based on an actual trained model.
-- Verified offline fallback behavior on the physical prototype.
-- Final experimental evaluation and complete course evidence package.
+- Project proposal, development schedule, architecture notes, experiment records and evidence index are present in the repository.
+- ESP32-S3 firmware development environment and PlatformIO project are established.
+- DHT11 temperature/humidity acquisition on GPIO4 passed the independent 22/22-read test and was also observed in the main firmware serial output (EXP-001).
+- ESP32-S3 Wi-Fi connection and one-way HTTP sensor upload to Flask returned HTTP 200 in the historical retest (EXP-004). This does not prove permanent connectivity or command delivery.
+- PIR signal acquisition on GPIO5 was uploaded and observed to produce HIGH/LOW transitions; eight cycles and a stationary LOW interval were recorded (EXP-009). Detection range, angle, false-trigger rate and long-term stability were not calibrated.
+- An independent GPIO6/MOSFET test demonstrated basic fan switching and continuous operation at 100% PWM duty (EXP-012). This is not a variable-speed test and is not the production firmware/web integration test.
+- Flask fan-command queue and its state-management APIs are implemented; the recorded automated test result is 22 passed, 0 failed (Phase 3.2.1).
+- ESP32 remote-command polling/ACK, AUTO/MANUAL arbitration and frontend command-status UI are present in the software deliverables; the five PlatformIO environments were reported as compiling successfully (Phase 3.2.2 / manual-control repair report).
+- Frontend sensor display, charts, control-mode/gear UI and command-status polling code are present.
+
+### Implemented in software; physical integration still pending
+
+- Main-firmware temperature/PIR automatic-control logic (28 °C start threshold, 26 °C stop threshold and 60-second idle timeout) is implemented and compile-reported; the combined physical fan-control behavior has not been demonstrated by an end-to-end test.
+- Remote command creation, ESP32 polling, execution handling and ACK reporting are implemented in software; actual webpage-to-ESP32-to-MOSFET-to-fan operation remains pending hardware verification.
+- FanController supports software gear/PWM levels, but only OFF and full-duty operation are evidenced by the independent hardware test. Intermediate levels and actual speed differences remain unverified.
+
+### Remaining work / not yet verified
+
+- Measure fan startup/current behavior, driver output, GPIO waveform and module temperature; confirm the exact MOSFET board revision and electrical compatibility.
+- Verify intermediate PWM levels and repeatable OFF/LOW/MEDIUM/HIGH physical behavior.
+- Complete physical web-to-fan remote-control testing, including command ACK and UI state matching the actual fan response.
+- Complete combined PIR + temperature + fan automatic-control tests, including 60-second timeout and sensor-failure behavior.
+- Verify Wi-Fi/backend outage and reboot fallback behavior on the physical prototype.
+- Train and evaluate a machine-learning model; current recommendation remains rule-based.
+- Complete final system stability, safety and course evidence checks.
 
 ## 12. Evidence-Based Development
 
