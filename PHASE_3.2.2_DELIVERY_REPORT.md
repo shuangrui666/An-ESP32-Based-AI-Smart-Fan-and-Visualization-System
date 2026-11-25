@@ -1,3 +1,5 @@
+> **Verification boundary (2026-11-25):** This report's “completed” status refers to software implementation, API/code review and the reported five-environment build. It does not document a completed end-to-end physical test of webpage command → ESP32 execution → MOSFET/fan response → ACK/UI confirmation. The latter remains pending and is indexed in experiment/system_test_log.md.
+
 # Phase 3.2.2 正式修复 - 交付报告
 
 **任务名称**: ESP32、Flask 后端和前端之间的真实远程控制链路实现  
