@@ -37,7 +37,7 @@ The project will document design decisions, implementation, experiments, limitat
 | Web dashboard | Displays sensor data and provides AUTO/MANUAL, gear and command-status UI | Sensor dashboard verified; software control UI/API implemented; physical fan response from web commands not yet verified |
 | Historical charts | Display sensor data in the web interface | Basic visualization implemented |
 | AI visualization | Show model structure and evaluation after model training | Not implemented |
-| Offline fallback | ESP32 uses a documented local rule when the computer/network is unavailable | Planned |
+| Offline fallback | Apply documented AUTO/MANUAL behavior on network loss or reboot | Software policy documented/implemented; physical outage/reboot behavior still needs testing |
 
 ## 4. Course Project Requirements and Deliverable Mapping
 
