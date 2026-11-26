@@ -78,8 +78,12 @@ enum class FanState {
     IDLE,           // 空闲状态（风扇关闭）
     SOFT_START,     // 软启动中
     RUNNING,        // 正常运行
-    SOFT_STOP       // 软停止中
+    SOFT_STOP,      // 软停止中
+    PWM_ERROR       // PWM 故障状态（连续失败达到阈值）
 };
+
+// PWM 失败阈值
+#define MAX_PWM_ERRORS 3  // 连续失败 3 次进入故障状态
 
 /**
  * 风扇控制器类
@@ -188,6 +192,12 @@ public:
      * @return 状态名称字符串
      */
     static const char* getStateName(FanState state);
+    
+    /**
+     * @brief 重置 PWM 错误状态（从故障状态恢复）
+     * @note 调用 setGear() 成功时会自动重置错误计数器
+     */
+    void resetPwmError();
 
 private:
     int _pin;
@@ -195,16 +205,21 @@ private:
     int _currentGear;
     int _targetGear;
     int _currentDuty;
+    int _pendingDuty;        // 待写入占空比（PWM 失败时保存）
+    bool _retryPending;      // 待重试标记（true 表示 _pendingDuty 尚未成功写入）
     bool _powerOn;
     bool _initialized;
     unsigned long _stateStartTime;
     unsigned long _softStartDuration;
     unsigned long _softStopDuration;
-    
+    uint8_t _pwmErrorCount;  // PWM 连续失败计数器
+    int _startDuty;          // 软启动起始占空比（用于线性插值计算）
+
     /**
      * @brief 更新 PWM 输出
      * @return true PWM 写入成功，false 失败（未初始化或 ledcWrite 失败）
      * @note 使用 LEDC API 输出 PWM 信号
+     * @note 仅负责 PWM 写入，不负责更新内部状态（由调用方控制）
      */
     bool _updatePWM();
     
